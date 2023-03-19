@@ -12,5 +12,6 @@ Please use this structure to keep the project organized. Feel free to create Sub
 - Scripts --> /Assets/Scripts
 
 ## Git branches
-**Never push to the master branch.** Always create your own branch first when creating a new feature. 
+**Never push to the master branch.** Always create your own branch first starting to develop a new feature. 
+
 Then create a pull request to merge it with the develop branch, **but only if the feature is stable and works.**
