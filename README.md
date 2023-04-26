@@ -11,26 +11,26 @@ The following lines show where assets are located in the project ("Type" --> "Fo
 Please use this structure to keep the project organized. Feel free to create Sub-folders when needed.
 
 - Levels --> /Assets/Scenes
-- Textures --> /Assets/Resources/Multimedia_image (create a folder here for each asset group containing the Albedo, Normals, etc.)
-- Meshes --> /Assets/Resources/Models
-- Materials --> /Assets/Resources/Materials
 - Scripts --> /Assets/Scripts
-- Assets from the Unity store --> /Assets/External
+- Custom prefabs --> /Assets/Resources/Prefabs
+- Custom Materials --> /Assets/Resources/Materials
+- Custom Models --> /Assets/Resources/Models
+- Textures --> /Assets/Resources/Multimedia_image
+- Audio files --> /Assets/Resources/Multimedia_sound
+- Video files --> /Assets/Resources/Multimedia_video
+- Animations --> /Assets/Resources/Multimedia_animation
+- Assets from the Unity store or other places --> /Assets/External
 
 ## Git branches
-**Never push to the "master" branch.** Always create your own branch from the "develop" branch first starting to develop a new feature. 
+**Never push to the "master" branch.** 
 
-Then create a pull request to merge it with the "develop" branch, **but only if the feature is stable and works.**
+Always create your own branch from the "develop" branch when first starting to develop a new feature. 
+
+When the feature is finished and stable and tested create a pull request to merge it with the "develop" branch.
 
 
-## Additional Features to implement
-- Skybox/lighting
-- Customize objects with UI
-- Terrain
-- Text meshes
-- Test animation
-- Spatial Audio
-- Change images through interaction
-- Texturing
-- Particle System
-- Improved Character movement (ability)
+## ToDo List
+https://docs.google.com/document/d/1YWu01joXKHWSaMj3Rgn_jmdWEzUgdvXaH-quLfzkhB8/edit
+
+## Dev Diary
+https://docs.google.com/spreadsheets/d/1oXscGeTdYPuGMn0VWFr1Knib2FsJSNA4S5gEMq26kI8/edit#gid=0
