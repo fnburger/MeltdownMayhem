@@ -4,7 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
-{   
+{
+    private float gameVolume;
+    private float bgmVolume;
+
+    public void Start()
+    {
+        LoadVolumeSettings();
+    }
+
     // function for Play Button in the main menu
     public void PlayGame ()
     {
@@ -17,6 +25,16 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("QUIT!");
         Application.Quit();
+    }
+
+    private void LoadVolumeSettings()
+    {
+        gameVolume = PlayerPrefs.GetFloat("gameVolume");
+        bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
+        AudioListener.volume = gameVolume;
+        // TODO: use bgmVolume to set it
+
+
     }
 
 }

@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     {
         // spawn players
         SpawnPlayers();
-        // lock player input
+        // TODO: lock player input
+        // ...
 
         // StartGame
         StartGame();
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // do stuff that needs to be checked every frame globally
+        // TODO: do stuff that needs to be checked every frame globally
         // stuff per player etc. can be done with another script on each player object 
         
     }
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayers()
     {
         // TODO: spawn players at start point
+        // ...
+
         Debug.Log("spawning players...");
     }
 

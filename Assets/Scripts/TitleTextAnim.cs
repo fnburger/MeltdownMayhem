@@ -6,6 +6,7 @@ using TMPro;
 public class TitleTextAnim : MonoBehaviour
 {
     public TMP_Text textComponent;
+    public float amplitude = 5f;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +30,7 @@ public class TitleTextAnim : MonoBehaviour
             {
                 var orig = verts[charInfo.vertexIndex + j];
                 // actual animation. modifies the draft data (textInfo.meshInfo[i].vertices)
-                verts[charInfo.vertexIndex + j] = orig + new Vector3(0, Mathf.Sin(Time.time * 2f + orig.x * 0.01f) * 10f, 0);
+                verts[charInfo.vertexIndex + j] = orig + new Vector3(0, Mathf.Sin(Time.time * 2f + orig.x * 0.01f) * amplitude, 0);
             }
         }
 
