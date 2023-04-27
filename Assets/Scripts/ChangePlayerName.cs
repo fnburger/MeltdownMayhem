@@ -1,42 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ChangePlayerName : MonoBehaviour
 {
-    //[SerializeField] TextArea textArea;
+    public TMP_InputField textArea;
+    public string playerPrefsKey;
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    if (!PlayerPrefs.HasKey("player1_name"))
-    //    {
-    //        PlayerPrefs.SetFloat("player1_name", textArea.getString());
-    //    }
-    //    else
-    //    {
-    //        Load();
-    //    }
-    //}
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (!PlayerPrefs.HasKey(playerPrefsKey))
+        {
+            PlayerPrefs.SetString(playerPrefsKey, textArea.text);
+        }
+        else
+        {
+            Load();
+        }
+    }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    public void ChangeName()
+    {
+        Save();
+    }
 
-    //public void ChangeName()
-    //{
-    //    Save();
-    //}
+    private void Load()
+    {
+        textArea.text = PlayerPrefs.GetString(playerPrefsKey);
+    }
 
-    //private void Load()
-    //{
-    //    textArea.getString() = PlayerPrefs.GetFloat("player1_name");
-    //}
-
-    //private void Save()
-    //{
-    //    PlayerPrefs.SetFloat("player1_name", textArea.getString());
-    //}
+    private void Save()
+    {
+        PlayerPrefs.SetString(playerPrefsKey, textArea.text);
+    }
 }
