@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
 
+    private List<Camera> cameras = new List<Camera>();
+
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         // spawn players
         //SpawnPlayers();
         // TODO: lock player input
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
+        if (players.Count == 2) return;
+
         players.Add(player);
 
         // need to use the parent due to the structure of the prefab
@@ -67,6 +72,19 @@ public class GameManager : MonoBehaviour
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
         // set the action in the custom cinemachine Input Handler
         playerParent.GetComponentInChildren<InputHandler>().horizontal = player.actions.FindAction("Look");
+
+
+        cameras.Add(playerParent.GetComponentInChildren<Camera>());
+        Debug.Log(cameras);
+
+        //if (cameras.Count > 1)
+        //{
+        //    Transform playerP = players[0].transform.parent;
+        //    Debug.Log(playerP.GetComponentInChildren<Camera>().isActiveAndEnabled);
+        //}
+
+        //cameras.AddRange(FindObjectsOfType<Camera>());
+
     }
 
     public void SpawnPlayers()
