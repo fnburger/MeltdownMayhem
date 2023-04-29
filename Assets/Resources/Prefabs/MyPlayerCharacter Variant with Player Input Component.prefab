@@ -139,9 +139,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7937a70fe9a21b94f9b9aa17b7053716, type: 3}
+--- !u!1 &2945415635328836587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3645781110123715019, guid: 7937a70fe9a21b94f9b9aa17b7053716,
+    type: 3}
+  m_PrefabInstance: {fileID: 1907377179124628000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6181331448147974748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945415635328836587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335494b6b2e2f3648a166121b76cbb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 3884898490516064688}
+  virtualCam: {fileID: 6157586048632185703}
 --- !u!20 &3884898490516064688 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3427718601992418192, guid: 7937a70fe9a21b94f9b9aa17b7053716,
     type: 3}
   m_PrefabInstance: {fileID: 1907377179124628000}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6157586048632185703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5696066799632095559, guid: 7937a70fe9a21b94f9b9aa17b7053716,
+    type: 3}
+  m_PrefabInstance: {fileID: 1907377179124628000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2140853508174365114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6157586048632185703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4622ed6774ba94fa6953f44ebae7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontal:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  vertical:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0

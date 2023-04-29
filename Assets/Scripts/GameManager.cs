@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        // spawn players
-        //SpawnPlayers();
-        // TODO: lock player input
+        // move players to starting points
+
+
+        // TODO: lock player input until fgames starts
         // ...
 
         // StartGame
@@ -56,43 +56,64 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(PlayerInput player)
     {
         if (players.Count == 2) return;
+        if (player == null) Debug.Log("joined player is null :( --> GameManager");
 
+        // ad player to our list of players
         players.Add(player);
-
-        // need to use the parent due to the structure of the prefab
-        Transform playerParent = player.transform.parent;
-        playerParent.position = startingPoints[players.Count - 1].position;
+        // move the player to the designated start position
+        MovePlayerToStart(player);
 
         // convert layer mask (bit) to an integer
         int layerToAdd = (int)Mathf.Log(playerLayers[players.Count - 1].value, 2);
 
+        // need to use the parent due to the structure of the prefab
+        Transform playerParent = player.transform.parent;
         // set the layer
-        playerParent.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
+        playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         // add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
         // set the action in the custom cinemachine Input Handler
         playerParent.GetComponentInChildren<InputHandler>().horizontal = player.actions.FindAction("Look");
 
-
         cameras.Add(playerParent.GetComponentInChildren<Camera>());
-        Debug.Log(cameras);
 
-        //if (cameras.Count > 1)
-        //{
-        //    Transform playerP = players[0].transform.parent;
-        //    Debug.Log(playerP.GetComponentInChildren<Camera>().isActiveAndEnabled);
-        //}
+        // if this is player 1
+        if (players.Count == 1)
+        {
+            Debug.Log("Player 1 joined!");
+            // reduce player 1 camera priority so that player 2 will see his own cam
+            playerParent.GetComponentInChildren<Camera>().depth -= 1;
 
-        //cameras.AddRange(FindObjectsOfType<Camera>());
+        } 
+        else
+        {
+            Debug.Log("Player 2 joined!");
+            // setup cam distance from players
+            SetupPlayerCamPositions();
+        }
+
 
     }
 
-    public void SpawnPlayers()
+    public void MovePlayerToStart(PlayerInput player)
     {
-        // TODO: spawn players at start point
-        // ...
+        
+        Transform playerParent = player.transform.parent;
+        playerParent.position = startingPoints[players.Count - 1].position;
+    }
 
-        Debug.Log("spawning players...");
+    public void SetupPlayerCamPositions()
+    {
+        
+        //cameras.ForEach(transform.position += new Vector3(0f, 5f, 2.5f));
+        //transform.position += new Vector3(0f, 5f, 2.5f); 
+        for (int i = 0; i < 2; i++)
+        {
+            Transform parent = players[i].transform.parent;
+            parent.GetComponentInChildren<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 100;
+            Debug.Log("set distance");
+        }
+        
     }
 
     public void StartGame()
