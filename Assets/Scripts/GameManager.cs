@@ -4,45 +4,32 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
-
     public List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField]
-    private List<Transform> startingPoints;
+    private List<Transform> startingPoints; // a list of player starting points
     [SerializeField]
     private List<LayerMask> playerLayers;
-
     private PlayerInputManager playerInputManager;
-
     private List<Camera> cameras = new List<Camera>();
+    private int maxPlayerCount;
+    public int countdownTime = 3; // in seconds
+    private bool gameIsLive = false;
+    AudioSource gameStartSound;
 
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-    }
-
-    private void onEnable()
-    {
-        playerInputManager.onPlayerJoined += AddPlayer;
-    }
-
-    private void onDisable()
-    {
-        playerInputManager.onPlayerJoined -= AddPlayer;
+        maxPlayerCount = playerInputManager.maxPlayerCount;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // move players to starting points
+        gameStartSound = GetComponent<AudioSource>();
 
-
-        // TODO: lock player input until fgames starts
-        // ...
-
-        // StartGame
-        //StartGame();
     }
 
     // Update is called once per frame
@@ -50,19 +37,27 @@ public class GameManager : MonoBehaviour
     {
         // TODO: do stuff that needs to be checked every frame globally
         // stuff per player etc. can be done with another script on each player object 
-        
+
+        if(!gameIsLive && players.Count == 2)
+        {
+            StartGame(); // start game when player 2 has joined
+        }
+
+        if(gameIsLive && players.Count != 2)
+        {
+            // TODO: Pause Game because a player left
+            PauseGame();
+        }
     }
 
     public void AddPlayer(PlayerInput player)
     {
-        if (players.Count == 2) return;
+        if (players.Count == maxPlayerCount) return;
         if (player == null) Debug.Log("joined player is null :( --> GameManager");
 
-        // ad player to our list of players
+        // add player to our list of players
         players.Add(player);
-        // move the player to the designated start position
-        MovePlayerToStart(player);
-
+        
         // convert layer mask (bit) to an integer
         int layerToAdd = (int)Mathf.Log(playerLayers[players.Count - 1].value, 2);
 
@@ -83,52 +78,73 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player 1 joined!");
             // reduce player 1 camera priority so that player 2 will see his own cam
             playerParent.GetComponentInChildren<Camera>().depth -= 1;
-
         } 
         else
         {
             Debug.Log("Player 2 joined!");
-            // setup cam distance from players
-            SetupPlayerCamPositions();
         }
-
-
+        // move the player to the designated start position
+        MovePlayerToStart(player);
     }
 
     public void MovePlayerToStart(PlayerInput player)
     {
-        
         Transform playerParent = player.transform.parent;
-        playerParent.position = startingPoints[players.Count - 1].position;
+        DisablePlayerController(player);
+        playerParent.transform.position = startingPoints[players.Count - 1].transform.position;
+        //EnablePlayerController(player);
     }
 
-    public void SetupPlayerCamPositions()
+    public void DisablePlayerController(PlayerInput player)
     {
-        
-        //cameras.ForEach(transform.position += new Vector3(0f, 5f, 2.5f));
-        //transform.position += new Vector3(0f, 5f, 2.5f); 
-        for (int i = 0; i < 2; i++)
+        player.GetComponent<CharacterController>().enabled = false;
+    }
+
+    public void EnablePlayerController(PlayerInput player)
+    {
+        player.GetComponent<CharacterController>().enabled = true;
+    }
+
+    public void EnablePlayerController()
+    {
+        for (int i = 0; i < maxPlayerCount; i++)
         {
-            Transform parent = players[i].transform.parent;
-            parent.GetComponentInChildren<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 100;
-            Debug.Log("set distance");
+            EnablePlayerController(players[i]);
         }
-        
+    }
+
+    public void DisablePlayerController()
+    {
+        for (int i = 0; i < maxPlayerCount; i++)
+        {
+            DisablePlayerController(players[i]);
+        }
     }
 
     public void StartGame()
     {
-        // TODO: show countdown, then allow player input
+        gameIsLive = true;
         Debug.Log("Starting game...");
 
-        // spawning items
-        SpawnItems();
+        // TODO: show countdown, its length in seconds should be equal to countdownTime
+
+
+        // enable all player controllers after the countdown has passed
+        Invoke("EnablePlayerController", countdownTime);
+        // play start game sound after countdown has finished
+        Invoke("PlayGameStartSound", countdownTime);
     }
 
-    public void SpawnItems()
+    public void PauseGame()
     {
-        // TODO: spawn items randomly on the map
+        gameIsLive = false;
+        // TODO
     }
 
+    public void PlayGameStartSound()
+    {
+        gameStartSound.Play(0);
+    }
+   
     
 }
