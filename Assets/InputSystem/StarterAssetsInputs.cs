@@ -12,7 +12,8 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-		public bool slide;
+		public bool useItem;
+		//public bool slide;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -77,16 +78,32 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 
-		public void SlideInput(bool newSlideState)
+
+		public void UseItemInput(bool newUseItemState)
+		{
+			useItem = newUseItemState;
+		}
+
+		public void onUseItem(InputValue value)
         {
-			slide = newSlideState;
+			UseItemInput(value.isPressed);
+			if(useItem)
+            {
+				Debug.Log("using item");
+			}
+			
         }
 
-		public void onSlide(InputValue value)
-        {
-			SlideInput(value.isPressed); // is the slide button is currently pressed?
-			// do stuff here to make the character slide
-        }
+		//public void SlideInput(bool newSlideState)
+		//      {
+		//	slide = newSlideState;
+		//      }
+
+		//public void onSlide(InputValue value)
+		//      {
+		//	SlideInput(value.isPressed); // is the slide button is currently pressed?
+		//	// do stuff here to make the character slide
+		//      }
 	}
 	
 }

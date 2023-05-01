@@ -122,6 +122,9 @@ namespace StarterAssets
             }
         }
 
+        private InputActionAsset inputAsset;
+        private InputActionMap player;
+        private InputAction move;
 
         private void Awake()
         {
@@ -130,6 +133,20 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            inputAsset = this.GetComponent<PlayerInput>().actions;
+            player = inputAsset.FindActionMap("Player");
+        }
+
+        private void OnEnable()
+        {
+            //player.FindAction("Jump").started += JumpAndGravity;
+            move = player.FindAction("Move");
+            player.Enable();
+        }
+
+        private void onDisable()
+        {
+            player.Disable();
         }
 
         private void Start()
@@ -386,7 +403,10 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                //Debug.Log("Landed");
             }
         }
+
+
     }
 }
