@@ -5,6 +5,10 @@ using UnityEngine;
 public class MainPlayerScript : MonoBehaviour
 {
 
+    public AudioSource sfx_source;
+
+    
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //print(hit.gameObject.name);
@@ -13,6 +17,14 @@ public class MainPlayerScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         print("entered");
+
+        if (other.gameObject.layer == 12)
+        {
+            sfx_source = GetComponent<AudioSource>();
+            sfx_source.Play();
+            print("Got item");
+            Destroy(other.gameObject);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -25,7 +37,9 @@ public class MainPlayerScript : MonoBehaviour
         print("exited");
     }
 
-    // Start is called before the first frame update
+
+
+   
     void Start()
     {
         
