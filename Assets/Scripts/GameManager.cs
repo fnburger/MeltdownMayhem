@@ -7,14 +7,28 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
+    [TextArea]
+    public string Information_for_devs = "There must be a PlayerInputManager Object and a LevelCamera object with priority < 9 in the scene.";
+    [Header("Reference to the LevelCamera")]
+    [SerializeField]
+    [Tooltip("You must set this reference manually in the editor.")]
+    public Camera levelCam;
+    [Header("List of Players")]
+    [Tooltip("Gets filled automatically when players join")]
     public List<PlayerInput> players = new List<PlayerInput>();
+    [Header("Player Starting Locations")]
+    [Tooltip("Move these to the desired locations. Players get moved to this location after joining.")]
     [SerializeField]
     private List<Transform> startingPoints; // a list of player starting points
+    [Header("Player Camera render layers")]
+    [Tooltip("Must be the same as the camera culling mask settings in each player prefab respectively. Do not change if each player sees though the correct camera.")]
     [SerializeField]
     private List<LayerMask> playerLayers;
     private PlayerInputManager playerInputManager;
     private List<Camera> cameras = new List<Camera>();
     private int maxPlayerCount;
+    [Header("Delay before the game starts after player 2 has joined")]
+    [Tooltip("Should be the same length in seconds as the countdown animation.")]
     public int countdownTime = 3; // in seconds
     private bool gameIsLive = false;
     AudioSource gameStartSound;
@@ -52,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
+        deactivateLevelCam();
         if (players.Count == maxPlayerCount) return;
         if (player == null) Debug.Log("joined player is null :( --> GameManager");
 
@@ -119,6 +134,11 @@ public class GameManager : MonoBehaviour
         {
             DisablePlayerController(players[i]);
         }
+    }
+
+    public void deactivateLevelCam()
+    {
+        levelCam.enabled = false;
     }
 
     public void StartGame()

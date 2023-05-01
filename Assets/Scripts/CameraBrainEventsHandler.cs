@@ -25,7 +25,7 @@ public class CameraBrainEventsHandler : MonoBehaviour
         GameManager = GameObject.Find("GameManager");
         player = this.transform.parent.GetComponentInChildren<PlayerInput>();
 
-        // add player to global list of players
+        // add player to global list of players in GameManager Object
         GameManager.GetComponent<GameManager>().AddPlayer(player);
     }
 
