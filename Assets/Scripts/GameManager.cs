@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int countdownTime = 3; // in seconds
     private bool gameIsLive = false;
     AudioSource gameStartSound;
+    private bool istTesting;
 
     private void Awake()
     {
@@ -155,6 +156,16 @@ public class GameManager : MonoBehaviour
         Invoke("PlayGameStartSound", countdownTime);
     }
 
+    // for devs only
+    public void StartTesting()
+    {
+        istTesting = true;
+        gameIsLive = true;
+        Debug.Log("Starting test...");
+        EnablePlayerController();
+        PlayGameStartSound();
+    }
+
     public void PauseGame()
     {
         gameIsLive = false;
@@ -163,7 +174,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayGameStartSound()
     {
-        gameStartSound.Play(0);
+        if (gameStartSound != null) gameStartSound.Play(0);
     }
    
     

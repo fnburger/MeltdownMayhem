@@ -17,9 +17,16 @@ public class CameraBrainEventsHandler : MonoBehaviour
 
     public GameObject GameManager;
     public PlayerInput player;
+    public bool singleplayer;
 
     void Awake()
     {
+        if (singleplayer)
+        {
+            Debug.Log("playing in singleplayer mode");
+            GameManager.GetComponent<GameManager>().StartTesting();
+            return;
+        }
         _cmBrain = GetComponent<CinemachineBrain>();
         _cmBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         GameManager = GameObject.Find("GameManager");
