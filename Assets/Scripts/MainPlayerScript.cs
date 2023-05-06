@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainPlayerScript : MonoBehaviour
 {
+
+    public int playerID;
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -35,5 +38,14 @@ public class MainPlayerScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UseItem()
+    {
+        Debug.Log("Player " + playerID + " used an item!");
+        // check if player has an item, if no play a sound
+        // else:
+            // check which item was used and call the specific effect function inside the corresponding game object version
+         
     }
 }

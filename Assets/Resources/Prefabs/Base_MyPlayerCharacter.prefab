@@ -2096,6 +2096,7 @@ GameObject:
   - component: {fileID: 152388613145403488}
   - component: {fileID: 5932178415023396588}
   - component: {fileID: 7997561683426101916}
+  - component: {fileID: 4836991883579737085}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -2331,14 +2332,42 @@ MonoBehaviour:
     m_ActionId: 980e881e-182c-404c-8cbf-3d09fdb48fef
     m_ActionName: Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4836991883579737085}
+        m_TargetAssemblyTypeName: MainPlayerScript, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 264f41a4-2ae9-4dfb-a1ac-cceb65a8bdaa
+    m_ActionName: Player/UseItem[/Keyboard/e,/Keyboard/enter,/DualShock4GamepadHID/leftShoulder]
+  - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e4ce1614-c754-48c1-9103-33130441661f
-    m_ActionName: UI/New action
+    m_ActionId: 9dc92138-f9b9-4137-b698-cc5218706b52
+    m_ActionName: Player/Join[/Keyboard/anyKey,/DualShock4GamepadHID/leftStickPress,/DualShock4GamepadHID/start,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4836991883579737085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997561683426101904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24db9c44ed3218d4683fa76ad71c28cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8066293857543671875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,7 +2967,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8944336655422409497, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
 --- !u!1 &3427718601992418194 stripped
 GameObject:
@@ -2960,6 +2990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   player: {fileID: 0}
+  singleplayer: 0
 --- !u!114 &3645781108966247963
 MonoBehaviour:
   m_ObjectHideFlags: 0
