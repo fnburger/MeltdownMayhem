@@ -45,12 +45,12 @@ PrefabInstance:
     - target: {fileID: 3427718601992418199, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8139999
+      value: 2.7970002
       objectReference: {fileID: 0}
     - target: {fileID: 3427718601992418199, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -10.492
       objectReference: {fileID: 0}
     - target: {fileID: 3645781110123715018, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
@@ -119,8 +119,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5696066799632095416, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.7970002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696066799632095416, guid: 7937a70fe9a21b94f9b9aa17b7053716,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -10.492
       objectReference: {fileID: 0}
     - target: {fileID: 7997561683426101916, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
@@ -201,3 +206,21 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!1 &8396212231671099568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7997561683426101904, guid: 7937a70fe9a21b94f9b9aa17b7053716,
+    type: 3}
+  m_PrefabInstance: {fileID: 1907377179124628000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2767572223977817762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8396212231671099568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b973a9602858614191b3296fb14f782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
