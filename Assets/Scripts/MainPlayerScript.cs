@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainPlayerScript : MonoBehaviour
 {
-
+    
     public AudioSource sfx_source;              //Item get sfx
     [SerializeField] GameObject item_get_particles;
 
@@ -13,8 +14,10 @@ public class MainPlayerScript : MonoBehaviour
     //If it's -1, the player is not holding an item. When using items, you need to set it back to -1.
     //Set when getting an item in OnTriggerEnter event.
     public int current_item = -1;
-
-
+    
+    // integer that holds the player ID; can either be "1" for player one or "2" for player 2
+    // gets set when a player first joins using the gamemanager script
+    public int playerID;
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -67,5 +70,14 @@ public class MainPlayerScript : MonoBehaviour
     void Update()
     {
    
+    }
+
+    public void UseItem()
+    {
+        Debug.Log("Player " + playerID + " used an item!");
+        // check if player has an item, if no play a sound
+        // else:
+            // check which item was used and call the specific effect function inside the corresponding game object version
+         
     }
 }

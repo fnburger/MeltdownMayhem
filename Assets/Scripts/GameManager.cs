@@ -94,10 +94,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player 1 joined!");
             // reduce player 1 camera priority so that player 2 will see his own cam
             playerParent.GetComponentInChildren<Camera>().depth -= 1;
+            playerParent.GetComponentInChildren<MainPlayerScript>().playerID = 1;
         } 
         else
         {
             Debug.Log("Player 2 joined!");
+            playerParent.GetComponentInChildren<MainPlayerScript>().playerID = 2;
         }
         // move the player to the designated start position
         MovePlayerToStart(player);
@@ -145,7 +147,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         gameIsLive = true;
-        Debug.Log("Starting game...");
+        Debug.Log("Starting game in " + countdownTime + " seconds...");
 
         // TODO: show countdown, its length in seconds should be equal to countdownTime
 
