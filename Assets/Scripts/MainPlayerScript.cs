@@ -7,6 +7,8 @@ public class MainPlayerScript : MonoBehaviour
 {
     
     public AudioSource sfx_source;              //Item get sfx
+    public GameObject obj_play_sfx;
+
     [SerializeField] GameObject item_get_particles;
 
 
@@ -75,6 +77,17 @@ public class MainPlayerScript : MonoBehaviour
     public void UseItem()
     {
         Debug.Log("Player " + playerID + " used an item!");
+
+        if (current_item == -1)
+        {
+            var sfx = Instantiate(obj_play_sfx);
+            //Destroy(sfx);
+        }
+
+        else
+        {
+
+        }
         // check if player has an item, if no play a sound
         // else:
             // check which item was used and call the specific effect function inside the corresponding game object version

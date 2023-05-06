@@ -17,11 +17,13 @@ public class item_display : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         item_text.text = "ITEM : " + item;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             item++;
         }
+        */
     }
 }
