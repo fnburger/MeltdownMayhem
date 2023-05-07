@@ -9,6 +9,10 @@ public class MainPlayerScript : MonoBehaviour
     public AudioSource sfx_source;              //Item get sfx
     public GameObject obj_play_sfx;
 
+    //Reference to script that holds all the item effects
+    ItemEffects item_effects_script;
+    apse sound_effects_script;
+
     [SerializeField] GameObject item_get_particles;
 
 
@@ -65,7 +69,9 @@ public class MainPlayerScript : MonoBehaviour
    
     void Start()
     {
-        
+        //Find the script where you want to call item use functions
+        item_effects_script = GameObject.FindGameObjectWithTag("ItemUse").GetComponent<ItemEffects>();
+        sound_effects_script = GameObject.FindGameObjectWithTag("SFX").GetComponent<apse>();
     }
 
     // Update is called once per frame
@@ -76,21 +82,34 @@ public class MainPlayerScript : MonoBehaviour
 
     public void UseItem()
     {
-        Debug.Log("Player " + playerID + " used an item!");
+       
 
+        //Nope
         if (current_item == -1)
         {
-            var sfx = Instantiate(obj_play_sfx);
-            //Destroy(sfx);
+            sound_effects_script.play_sfx_no();
         }
 
         else
-        {
+        {   
+            //Use
+            if (current_item == 0)
+            item_effects_script.use_rock_item();       
+            
+            if (current_item == 1)
+            item_effects_script.use_shaker_item();     
+            
+            if (current_item == 2)
+            item_effects_script.use_distraction_item();
 
+
+            //Play sfx and reset
+            sound_effects_script.play_sfx_use_item();
+            Debug.Log("Player " + playerID + " used item " + current_item);
+            current_item = -1;
+            
         }
-        // check if player has an item, if no play a sound
-        // else:
-            // check which item was used and call the specific effect function inside the corresponding game object version
+   
          
     }
 }
