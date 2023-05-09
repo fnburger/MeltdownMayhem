@@ -97,6 +97,8 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDWalk;
+        private int _animIDSprint;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -187,9 +189,11 @@ namespace StarterAssets
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
+            _animIDJump = Animator.StringToHash("isJump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDWalk = Animator.StringToHash("isWalking");
+            _animIDSprint = Animator.StringToHash("isSprint");
         }
 
         private void GroundedCheck()
@@ -237,8 +241,12 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
+            if (_input.move == Vector2.zero)
+            {
+                targetSpeed = 0.0f;
+                _animator.SetBool(_animIDWalk, false);
+                _animator.SetBool(_animIDSprint, false);
+            }
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
@@ -272,6 +280,18 @@ namespace StarterAssets
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
             {
+                if (_input.sprint)
+                {
+                    _animator.SetBool(_animIDSprint, true);
+                    _animator.SetBool(_animIDWalk, false);
+
+                } 
+                else 
+                {
+                    _animator.SetBool(_animIDSprint, false);
+                    _animator.SetBool(_animIDWalk, true);
+                }
+                
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
