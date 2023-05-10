@@ -13,6 +13,7 @@ public class InputHandler : MonoBehaviour, AxisState.IInputAxisProvider
 
     public float GetAxisValue(int axis)
     {
+        Debug.Log("input handler script GetAxisValue is called");
         switch (axis)
         {
             case 0: return horizontal.ReadValue<Vector2>().x;
@@ -33,6 +34,6 @@ public class InputHandler : MonoBehaviour, AxisState.IInputAxisProvider
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

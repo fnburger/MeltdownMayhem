@@ -36,4 +36,11 @@ public class MainPlayerScript : MonoBehaviour
     {
         
     }
+
+    // gets triggered automatically when the jump animation starts
+    void JumpEvent()
+    {
+        // TODO: play spin effect
+        Debug.Log("SPIN SFX");
+    }
 }
