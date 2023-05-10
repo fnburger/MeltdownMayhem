@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shaker
   m_EditorClassIdentifier: Assembly-CSharp::Item
   id: 1
-  name: Shaker
+  name: Mixer
   icon: {fileID: 21300000, guid: 871414c491a068144b3231eb1c96fb58, type: 3}

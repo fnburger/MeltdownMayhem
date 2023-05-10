@@ -9,6 +9,7 @@ public class MainPlayerScript : MonoBehaviour
     public AudioSource sfx_source;              //Item get sfx
     public GameObject obj_play_sfx;
 
+
     //Reference to script that holds all the item effects
     ItemEffects item_effects_script;
     apse sound_effects_script;
@@ -43,7 +44,8 @@ public class MainPlayerScript : MonoBehaviour
             sfx_source.Play();
 
             //GIVE PLAYER AN ITEM
-            current_item = Random.Range(0, 3);
+            //current_item = Random.Range(0, 3);
+            current_item = Random.Range(0,0);
             print("---GOT ITEM: " + current_item);
 
 
