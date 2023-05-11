@@ -146,6 +146,8 @@ public class GameManager : MonoBehaviour
     {
         gameIsLive = true;
         Debug.Log("Starting game...");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         // TODO: show countdown, its length in seconds should be equal to countdownTime
 
@@ -169,6 +171,16 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         gameIsLive = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // TODO
+    }
+
+    public void UnpauseGame()
+    {
+        gameIsLive = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         // TODO
     }
 

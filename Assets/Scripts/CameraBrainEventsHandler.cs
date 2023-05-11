@@ -27,8 +27,8 @@ public class CameraBrainEventsHandler : MonoBehaviour
             GameManager.GetComponent<GameManager>().StartTesting();
             return;
         }
-        _cmBrain = GetComponent<CinemachineBrain>();
-        _cmBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
+        //_cmBrain = GetComponent<CinemachineBrain>();
+        //_cmBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         GameManager = GameObject.Find("GameManager");
         player = this.transform.parent.GetComponentInChildren<PlayerInput>();
 
