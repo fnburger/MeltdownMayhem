@@ -189,5 +189,17 @@ public class GameManager : MonoBehaviour
         if (gameStartSound != null) gameStartSound.Play(0);
     }
    
-    
+    public void EndGame(PlayerInput winner) //, playerID id
+    {
+        // winner completed the last lap
+        //Debug.Log("Player " + id + " won!");
+        Debug.Log("Player ?" + " won!");
+
+        // TODO
+    }
+
+    public void ResetGameState()
+    {
+        // TODO
+    }
 }

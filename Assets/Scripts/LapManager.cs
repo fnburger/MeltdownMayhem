@@ -9,7 +9,13 @@ public class LapManager : MonoBehaviour
     public List<Checkpoint> checkpoints;
     [Tooltip("You must set this manually in the editor. The amount of laps the players must complete to win the race.")]
     public int totalLaps;
+    GameManager gm;
 
+    void Start()
+    {
+        GameObject gmo = GameObject.Find("GameManager");
+        gm = gmo.GetComponent<GameManager>();
+    }
 
     void OnTriggerEnter(Collider collision)
     {
@@ -31,7 +37,9 @@ public class LapManager : MonoBehaviour
                 if(ps.lapNumber > totalLaps)
                 {
                     // End the race
-                    Debug.Log("You won!");
+                    //Debug.Log("You won!");
+                    //gm.EndGame(player, ps.playerID);
+                    gm.EndGame(player);
                 }
             }
         }
