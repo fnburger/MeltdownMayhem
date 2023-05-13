@@ -10,17 +10,6 @@ public class LapManager : MonoBehaviour
     [Tooltip("You must set this manually in the editor. The amount of laps the players must complete to win the race.")]
     public int totalLaps;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider collision)
     {

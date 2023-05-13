@@ -8,17 +8,6 @@ public class Checkpoint : MonoBehaviour
     [Tooltip("You must set this manually in the editor. The checkpoints have to be visited in ascending order. The first checkpoint must have index 1. The next one 2 and so on.")]
     public int index;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider collision)
     {
