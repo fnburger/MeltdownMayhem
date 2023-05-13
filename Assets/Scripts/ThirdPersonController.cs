@@ -133,7 +133,8 @@ namespace StarterAssets
             // get a reference to our main camera
             if (_mainCamera == null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                //_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                _mainCamera = this.transform.parent.GetComponentInChildren<Camera>().gameObject;
             }
             inputAsset = this.GetComponent<PlayerInput>().actions;
             player = inputAsset.FindActionMap("Player");
@@ -161,7 +162,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
             _playerInput = GetComponent<PlayerInput>();
 #else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+            Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
 
             AssignAnimationIDs();

@@ -284,7 +284,7 @@
                 {
                     "name": "",
                     "id": "d35eb788-8d6c-4756-a59f-dc4dedc395bc",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -296,17 +296,6 @@
                     "name": "",
                     "id": "cda5992c-7a17-4d35-9271-758ac4c65648",
                     "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b34d4feb-1ecd-46cd-9012-5c31350b22e3",
-                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

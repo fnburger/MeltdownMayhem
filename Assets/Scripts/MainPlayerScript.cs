@@ -5,6 +5,9 @@ using UnityEngine;
 public class MainPlayerScript : MonoBehaviour
 {
 
+    public int lapNumber; // which lap the player is currently on. starts with 1
+    public int checkpointIndex; // which checkpoint the player last passed. starts with 0.
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //print(hit.gameObject.name);
@@ -12,7 +15,7 @@ public class MainPlayerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        print("entered");
+        //print("entered");
     }
 
     void OnTriggerStay(Collider other)
@@ -22,13 +25,14 @@ public class MainPlayerScript : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        print("exited");
+        //print("exited");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        lapNumber = 1;
+        checkpointIndex = 0;
     }
 
     // Update is called once per frame
