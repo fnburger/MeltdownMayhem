@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         Transform playerParent = player.transform.parent;
         DisablePlayerController(player);
         playerParent.transform.position = startingPoints[players.Count - 1].transform.position;
+        playerParent.transform.rotation = startingPoints[players.Count - 1].transform.rotation;
         //EnablePlayerController(player);
     }
 
