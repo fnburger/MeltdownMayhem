@@ -89,6 +89,7 @@ public class MainPlayerScript : MonoBehaviour
         //Nope
         if (current_item == -1)
         {
+            Debug.Log("No item");
             sound_effects_script.play_sfx_no();
         }
 

@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -566724781963634048, guid: 7937a70fe9a21b94f9b9aa17b7053716,
+        type: 3}
+      propertyPath: obj_play_sfx
+      value: 
+      objectReference: {fileID: 4523032426398783291, guid: 8cb132863eddd644db52690d1c483884,
+        type: 3}
     - target: {fileID: 3336615267770929039, guid: 7937a70fe9a21b94f9b9aa17b7053716,
         type: 3}
       propertyPath: m_UpdateMethod
