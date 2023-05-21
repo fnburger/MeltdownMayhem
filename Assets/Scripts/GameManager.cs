@@ -143,6 +143,15 @@ public class GameManager : MonoBehaviour
         levelCam.enabled = false;
     }
 
+    public void MovePlayerToPosition(PlayerInput player, Transform location)
+    {
+        DisablePlayerController(player);
+        Transform playerParent = player.transform.parent;
+        playerParent.transform.position = location.position;
+        playerParent.transform.rotation = location.rotation;
+        //EnablePlayerController(player);
+    }
+
     public void StartGame()
     {
         gameIsLive = true;
