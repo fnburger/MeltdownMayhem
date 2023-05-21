@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         if(gameIsLive && players.Count != 2)
         {
-            // TODO: Pause Game because a player left
+            // TODO: Pause Game because a player left :ccccccc
             PauseGame();
         }
     }
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
         deactivateLevelCam();
         if (players.Count == maxPlayerCount) return;
-        if (player == null) Debug.Log("joined player is null :( --> GameManager");
+        if (player == null) Debug.Log("joined player is null :(((( --> GameManager");
 
         // add player to our list of players
         players.Add(player);

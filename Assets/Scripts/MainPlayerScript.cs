@@ -33,8 +33,7 @@ public class MainPlayerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        print("entered");
-
+        Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
 
         //ITEM COLLISION
         if (other.gameObject.layer == 12)
@@ -42,6 +41,7 @@ public class MainPlayerScript : MonoBehaviour
             //PLAY SFX
             sfx_source = GetComponent<AudioSource>();
             sfx_source.Play();
+            Debug.Log("Game object: " + this.gameObject);
 
             //GIVE PLAYER AN ITEM
             //current_item = Random.Range(0, 3);
@@ -79,7 +79,7 @@ public class MainPlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+        //Debug.Log(current_item);
     }
 
     public void UseItem()
