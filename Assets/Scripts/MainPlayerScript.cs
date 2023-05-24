@@ -38,7 +38,7 @@ public class MainPlayerScript : MonoBehaviour
     {
         Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
 
-        //ITEM COLLISION
+        //ITEM BOX COLLISION
         if (other.gameObject.layer == 12)
         {
             //PLAY SFX
@@ -56,6 +56,12 @@ public class MainPlayerScript : MonoBehaviour
             GameObject particles = Instantiate(item_get_particles, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(particles, 0.7f);
+        }
+
+        //COLLISION WITH BOULDER FROM ENEMY
+        if (other.gameObject.layer == 13)
+        {
+
         }
     }
 
