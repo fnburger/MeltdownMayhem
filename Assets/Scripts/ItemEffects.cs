@@ -15,18 +15,6 @@ public class ItemEffects : MonoBehaviour
     static float rock_offset_from_ground = 1.0f;
 
 
-    /*public void setPlayer(Transform player_transform_id)
-    {
-        player = player_transform_id;
-    }
-
-    public void setTarget(Transform target_transform)
-    {
-        target = target_transform;
-    }*/
- 
-
-
 
     //Rock that is targeting the enemy. Slows down temporarily when hit.
     public void use_rock_item(Transform user, Transform target)
@@ -43,8 +31,10 @@ public class ItemEffects : MonoBehaviour
 
 
         var body = rock.GetComponent<Rigidbody>();
-        body.velocity = velocity;                               //Fly away to victory
+        body.velocity = velocity;                                                    //Fly away to victory
         body.AddTorque(new Vector3(160.0f,140.0f,180.0f), ForceMode.Force);         //Haha funny rotation
+
+        rock.GetComponent<RockVars>().target = target;
     }    
     
 

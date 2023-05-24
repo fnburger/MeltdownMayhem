@@ -61,7 +61,12 @@ public class MainPlayerScript : MonoBehaviour
         //COLLISION WITH BOULDER FROM ENEMY
         if (other.gameObject.layer == 13)
         {
+            Debug.Log("TARGET: " + other.GetComponent<RockVars>().target);
 
+            if (other.GetComponent<RockVars>().target == this.transform)
+            {
+                Debug.Log("Hit enemy");
+            }
         }
     }
 
@@ -120,23 +125,26 @@ public class MainPlayerScript : MonoBehaviour
                 else id = x.transform;                //Player who used the item
             }
 
+            //Play sfx and reset
+            sound_effects_script.play_sfx_use_item();
+            Debug.Log("Player " + playerID + " used item " + current_item); 
+
+            var old_current_item = current_item;
+            current_item = -1;
 
             //Use
-            if (current_item == 0)
+            if (old_current_item == 0)
             item_effects_script.use_rock_item(id, other);       
             
-            if (current_item == 1)
+            if (old_current_item == 1)
             item_effects_script.use_shaker_item(id, other);     
             
-            if (current_item == 2)
+            if (old_current_item == 2)
             item_effects_script.use_distraction_item(id, other);
 
 
-
-            //Play sfx and reset
-            sound_effects_script.play_sfx_use_item();
-            Debug.Log("Player " + playerID + " used item " + current_item);
-            current_item = -1;
+            //Dont write code after this, doesnt get called 
+          
             
         }
    
