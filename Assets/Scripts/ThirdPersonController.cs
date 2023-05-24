@@ -92,16 +92,19 @@ namespace StarterAssets
         private float _fallTimeoutDelta;
 
         // animation IDs
-        private int _animIDSpeed;
-        private int _animIDGrounded;
+        //private int _animIDSpeed;
+        //private int _animIDGrounded;
         private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
+        //private int _animIDFreeFall;
+        //private int _animIDMotionSpeed;
         private int _animIDWalk;
         private int _animIDSprint;
 
+        private CharacterController char_controller;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
+        
 #endif
         private Animator _animator;
         private CharacterController _controller;
@@ -138,7 +141,9 @@ namespace StarterAssets
             }
             inputAsset = this.GetComponent<PlayerInput>().actions;
             player = inputAsset.FindActionMap("Player");
-        }
+            char_controller = this.GetComponent<PlayerInput>().GetComponent<CharacterController>();
+
+    }
 
         private void OnEnable()
         {
@@ -176,9 +181,13 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (char_controller.enabled)
+            {
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+            }
+            
         }
 
         private void LateUpdate()
@@ -188,11 +197,11 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
+            //_animIDSpeed = Animator.StringToHash("Speed");
+            //_animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("isJump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            //_animIDFreeFall = Animator.StringToHash("FreeFall");
+            //_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDWalk = Animator.StringToHash("isWalking");
             _animIDSprint = Animator.StringToHash("isSprint");
         }
@@ -206,10 +215,10 @@ namespace StarterAssets
                 QueryTriggerInteraction.Ignore);
 
             // update animator if using character
-            if (_hasAnimator)
+            /*if (_hasAnimator)
             {
                 _animator.SetBool(_animIDGrounded, Grounded);
-            }
+            }*/
         }
 
         private void CameraRotation()
@@ -310,11 +319,11 @@ namespace StarterAssets
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
-            if (_hasAnimator)
+            /*if (_hasAnimator)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-            }
+            }*/
         }
 
         private void JumpAndGravity()
@@ -328,7 +337,7 @@ namespace StarterAssets
                 if (_hasAnimator)
                 {
                     _animator.SetBool(_animIDJump, false);
-                    _animator.SetBool(_animIDFreeFall, false);
+                    //_animator.SetBool(_animIDFreeFall, false);
                 }
 
                 // stop our velocity dropping infinitely when grounded
@@ -369,10 +378,10 @@ namespace StarterAssets
                 else
                 {
                     // update animator if using character
-                    if (_hasAnimator)
+                    /*if (_hasAnimator)
                     {
                         _animator.SetBool(_animIDFreeFall, true);
-                    }
+                    }*/
                 }
 
                 // if we are not grounded, do not jump

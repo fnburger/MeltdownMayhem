@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         Transform playerParent = player.transform.parent;
         DisablePlayerController(player);
         playerParent.transform.position = startingPoints[players.Count - 1].transform.position;
+        playerParent.transform.rotation = startingPoints[players.Count - 1].transform.rotation;
         //EnablePlayerController(player);
     }
 
@@ -140,6 +141,15 @@ public class GameManager : MonoBehaviour
     public void deactivateLevelCam()
     {
         levelCam.enabled = false;
+    }
+
+    public void MovePlayerToPosition(PlayerInput player, Transform location)
+    {
+        DisablePlayerController(player);
+        Transform playerParent = player.transform.parent;
+        playerParent.transform.position = location.position;
+        playerParent.transform.rotation = location.rotation;
+        //EnablePlayerController(player);
     }
 
     public void StartGame()
