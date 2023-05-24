@@ -14,6 +14,9 @@ public class MainPlayerScript : MonoBehaviour
     ItemEffects item_effects_script;
     apse sound_effects_script;
 
+    //Reference to script that holds player instance ids
+    GameManager game_manager;                   
+
     [SerializeField] GameObject item_get_particles;
 
 
@@ -74,6 +77,7 @@ public class MainPlayerScript : MonoBehaviour
         //Find the script where you want to call item use functions
         item_effects_script = GameObject.FindGameObjectWithTag("ItemUse").GetComponent<ItemEffects>();
         sound_effects_script = GameObject.FindGameObjectWithTag("SFX").GetComponent<apse>();
+        game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -84,7 +88,6 @@ public class MainPlayerScript : MonoBehaviour
 
     public void UseItem()
     {
-       
 
         //Nope
         if (current_item == -1)
@@ -94,16 +97,34 @@ public class MainPlayerScript : MonoBehaviour
         }
 
         else
-        {   
+        {
+            //SET USER AND TARGET------------------------------------------------------------------------------------------
+            //If playerID == 1, target = 2 
+            int target_id = playerID == 1 ? 2 : 1;
+
+            Transform other = transform;
+            Transform id = transform;
+
+            //Get target object
+            foreach (var x in game_manager.players)
+            {
+                if (x.transform.parent.GetComponentInChildren<MainPlayerScript>().playerID == target_id)
+                    other = x.transform;              //Player who gets item in the face
+
+                else id = x.transform;                //Player who used the item
+            }
+
+
             //Use
             if (current_item == 0)
-            item_effects_script.use_rock_item();       
+            item_effects_script.use_rock_item(id, other);       
             
             if (current_item == 1)
-            item_effects_script.use_shaker_item();     
+            item_effects_script.use_shaker_item(id, other);     
             
             if (current_item == 2)
-            item_effects_script.use_distraction_item();
+            item_effects_script.use_distraction_item(id, other);
+
 
 
             //Play sfx and reset

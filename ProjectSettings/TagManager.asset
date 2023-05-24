@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - ItemUse
   - SFX
+  - GameManager
   layers:
   - Default
   - TransparentFX
