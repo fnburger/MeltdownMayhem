@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/BlockingVolume.prefab.meta
 guid: 8e5508c70fcc6dd46a16152f3d206f33
+========
+guid: e14eb345290347b4fb76f9d459a925b9
+>>>>>>>> Item3:Assets/External/Prefabs/Particle System.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

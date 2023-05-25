@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/External/CartoonMedievalTown_LITE.meta
 guid: 5fc2e94e0e7559e42bfadb8bd2092ef1
+========
+guid: 9bb065ac9fd033d41bcf4aa8d9e0a1c3
+>>>>>>>> Item3:Assets/External/Boulder.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

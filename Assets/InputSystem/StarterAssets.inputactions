@@ -272,17 +272,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cd161410-5bd1-43b4-91d1-f140d4bbe223",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d35eb788-8d6c-4756-a59f-dc4dedc395bc",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",

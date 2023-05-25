@@ -25,7 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<LayerMask> playerLayers;
     private PlayerInputManager playerInputManager;
-    private List<Camera> cameras = new List<Camera>();
+
+    public List<Camera> cameras = new List<Camera>();
+
     private int maxPlayerCount;
     [Header("Delay before the game starts after player 2 has joined")]
     [Tooltip("Should be the same length in seconds as the countdown animation.")]
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         if(gameIsLive && players.Count != 2)
         {
-            // TODO: Pause Game because a player left
+            // TODO: Pause Game because a player left :ccccccc
             PauseGame();
         }
     }
@@ -69,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         deactivateLevelCam();
         if (players.Count == maxPlayerCount) return;
-        if (player == null) Debug.Log("joined player is null :( --> GameManager");
+        if (player == null) Debug.Log("joined player is null :(((( --> GameManager");
 
         // add player to our list of players
         players.Add(player);
@@ -94,10 +96,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player 1 joined!");
             // reduce player 1 camera priority so that player 2 will see his own cam
             playerParent.GetComponentInChildren<Camera>().depth -= 1;
+            playerParent.GetComponentInChildren<MainPlayerScript>().playerID = 1;
         } 
         else
         {
             Debug.Log("Player 2 joined!");
+            playerParent.GetComponentInChildren<MainPlayerScript>().playerID = 2;
         }
         // move the player to the designated start position
         MovePlayerToStart(player);
@@ -155,9 +159,9 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         gameIsLive = true;
-        Debug.Log("Starting game...");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Debug.Log("Starting game in " + countdownTime + " seconds...");
 
         // TODO: show countdown, its length in seconds should be equal to countdownTime
 

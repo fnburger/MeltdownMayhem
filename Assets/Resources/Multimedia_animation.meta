@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Multimedia_animation.meta
 guid: 6d235283848c420428fdc6451812ee7a
+========
+guid: 163f8106d5a1dfd409fc7ad1f55f389f
+>>>>>>>> Item3:Assets/Resources/Particles.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

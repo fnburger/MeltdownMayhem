@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Checkpoint.cs.meta
+guid: fc766b026e6359445a94f92fdd4f5a06
+========
+guid: 68cb222a36a4db949b67a8bca3efa6df
+>>>>>>>> Item3:Assets/Scripts/Item Class.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

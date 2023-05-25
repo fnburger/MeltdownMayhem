@@ -3,7 +3,12 @@ guid: 24db9c44ed3218d4683fa76ad71c28cd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sfx_source: {instanceID: 0}
+  - obj_play_sfx: {fileID: 4523032426398783291, guid: 8cb132863eddd644db52690d1c483884,
+      type: 3}
+  - item_get_particles: {fileID: 5860642683621516085, guid: d4e3d796458f41647ad365ca7b882bf4,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

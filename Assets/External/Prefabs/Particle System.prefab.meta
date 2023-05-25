@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/BlockingVolume.prefab.meta
+guid: 08df5b406ab0d4d4889a41f08ed51ce4
+========
+guid: e14eb345290347b4fb76f9d459a925b9
+>>>>>>>> Item3:Assets/External/Prefabs/Particle System.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
