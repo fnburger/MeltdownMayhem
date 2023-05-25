@@ -22,7 +22,6 @@ public class ItemEffects : MonoBehaviour
         Debug.Log("Haha I used a rock item OMEGALUL");
 
         var rock = Instantiate(boulder_item, new Vector3(user.position.x, user.position.y+ rock_offset_from_ground, user.position.z), Quaternion.identity);
-        
 
         var heading = target.position - user.position;
         var distance = heading.magnitude;                                  //Can be used but is unused

@@ -40,6 +40,11 @@ public class MainPlayerScript : MonoBehaviour
         //print(hit.gameObject.name);
     }
 
+    public void TakeDamage(GameObject insigator, float amount)
+    {
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
@@ -65,7 +70,7 @@ public class MainPlayerScript : MonoBehaviour
         }
 
         //COLLISION WITH BOULDER FROM ENEMY
-        if (other.gameObject.layer == 13)
+        if (other.gameObject.layer == 15)
         {
             Debug.Log("TARGET: " + other.GetComponent<RockVars>().target);
 
@@ -176,7 +181,11 @@ public class MainPlayerScript : MonoBehaviour
 
                 //Use
                 if (old_current_item == 0)
-                item_effects_script.use_rock_item(id, other);
+                {
+                    item_effects_script.use_rock_item(id, other);
+                }
+
+                
             }
 
 
