@@ -110,37 +110,52 @@ public class MainPlayerScript : MonoBehaviour
         else
         {
             //SET USER AND TARGET------------------------------------------------------------------------------------------
-            //If playerID == 1, target = 2 
-            int target_id = playerID == 1 ? 2 : 1;
 
-            Transform other = transform;
-            Transform id = transform;
+            if (current_item == 0)
+            { 
+                //If playerID == 1, target = 2 
+                int target_id = playerID == 1 ? 2 : 1;
 
-            //Get target object
-            foreach (var x in game_manager.players)
-            {
-                if (x.transform.parent.GetComponentInChildren<MainPlayerScript>().playerID == target_id)
-                    other = x.transform;              //Player who gets item in the face
+                Transform other = transform;
+                Transform id = transform;
 
-                else id = x.transform;                //Player who used the item
+                //Get target object for ROCK
+                foreach (var x in game_manager.players)
+                {
+                    if (x.transform.parent.GetComponentInChildren<MainPlayerScript>().playerID == target_id)
+                        other = x.transform;              //Player who gets item in the face
+
+                    else id = x.transform;                //Player who used the item
+                }
+
+                //Play sfx and reset
+                sound_effects_script.play_sfx_use_item();
+                Debug.Log("Player " + playerID + " used item " + current_item); 
+
+                var old_current_item = current_item;
+                current_item = -1;
+
+                //Use
+                if (old_current_item == 0)
+                item_effects_script.use_rock_item(id, other);
             }
 
-            //Play sfx and reset
-            sound_effects_script.play_sfx_use_item();
-            Debug.Log("Player " + playerID + " used item " + current_item); 
 
-            var old_current_item = current_item;
-            current_item = -1;
 
-            //Use
-            if (old_current_item == 0)
-            item_effects_script.use_rock_item(id, other);       
+            Camera[] camera_array = game_manager.cameras.ToArray();
+            GameObject target_camera = playerID == 1 ? camera_array[1].gameObject : camera_array[0].gameObject;
+
+
+            //CAMERA SHAKE EFFECT--------------------------------------------------------------------
+            if (current_item == 1)
+            {
+                item_effects_script.use_shaker_item(target_camera);
+            }
             
-            if (old_current_item == 1)
-            item_effects_script.use_shaker_item(id, other);     
             
-            if (old_current_item == 2)
-            item_effects_script.use_distraction_item(id, other);
+            //VIDEO DISTRACTION-------------------------------------------------------------------
+            if (current_item == 2)
+            item_effects_script.use_distraction_item(target_camera);
 
 
             //Dont write code after this, doesnt get called 

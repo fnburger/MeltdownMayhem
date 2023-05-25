@@ -25,7 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<LayerMask> playerLayers;
     private PlayerInputManager playerInputManager;
-    private List<Camera> cameras = new List<Camera>();
+
+    public List<Camera> cameras = new List<Camera>();
+
     private int maxPlayerCount;
     [Header("Delay before the game starts after player 2 has joined")]
     [Tooltip("Should be the same length in seconds as the countdown animation.")]

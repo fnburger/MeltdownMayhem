@@ -39,14 +39,14 @@ public class ItemEffects : MonoBehaviour
     
 
     //Item that shakes the camera of the other player.
-    public void use_shaker_item(Transform user, Transform target)
+    public void use_shaker_item(GameObject target_view)
     {
         Debug.Log("Used shaker item");
     }  
     
     //Item that creates a stupid video in front of the other player and
     //makes it hard to see.
-    public void use_distraction_item(Transform user, Transform target)
+    public void use_distraction_item(GameObject target)
     {
         Debug.Log("Used video item");
     }
