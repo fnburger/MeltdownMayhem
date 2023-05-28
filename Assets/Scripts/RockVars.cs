@@ -8,7 +8,7 @@ using UnityEngine;
 public class RockVars : MonoBehaviour
 {
     public Transform target;
-    float damage = 0.2;
+    float damage = 0.2f;
 
     void OnTriggerEnter(Collider other)
     {
