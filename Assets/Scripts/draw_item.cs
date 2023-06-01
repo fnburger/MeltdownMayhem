@@ -48,18 +48,23 @@ public class draw_item : MonoBehaviour
         Color c = image.color;
         c.a = item_background_alpha;
         image.color = c;
+
+        //Get the player object that's holding the item
+        game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
 
     //ACCESS SCRIPT THAT KNOWS WHICH ITEM THE PLAYER HOLDS
     void Update()
     {
-        //Get the player object that's holding the item
-        game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         var player_array = game_manager.players.ToArray();
-        GameObject player_holding_the_item = playerID == 1 ? player_array[0].gameObject : player_array[1].gameObject;
-        main_player_script = player_holding_the_item.GetComponent<MainPlayerScript>();
+
+        if (player_array.Length == 2)
+        {
+            GameObject player_holding_the_item = playerID == 1 ? player_array[0].gameObject : player_array[1].gameObject;
+            main_player_script = player_holding_the_item.GetComponent<MainPlayerScript>();
+        }
 
         var image = gameObject.GetComponent<Image>();
 
