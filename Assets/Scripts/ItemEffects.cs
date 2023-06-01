@@ -14,7 +14,14 @@ public class ItemEffects : MonoBehaviour
     static float rock_speed = 15.0f;           //Change this to make used rock item faster or slower
     static float rock_offset_from_ground = 1.0f;
 
+    GameManager game_manager;
 
+
+
+    void Start()
+    {
+        game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
 
     //Rock that is targeting the enemy. Slows down temporarily when hit.
     public void use_rock_item(Transform user, Transform target)
@@ -40,7 +47,14 @@ public class ItemEffects : MonoBehaviour
     //Item that shakes the camera of the other player.
     public void use_shaker_item(GameObject target_view)
     {
-        Debug.Log("Used shaker item");
+        //DEBUG
+        Debug.Log("Used shaker item OMEGASHAKE");
+        if (target_view == null) 
+            Debug.Log("target is nullomatico");
+
+
+        //ACTUAL EFFECT
+        target_view.transform.Rotate(Time.deltaTime + 500,0,0);
     }  
     
     //Item that creates a stupid video in front of the other player and

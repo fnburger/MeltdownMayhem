@@ -59,7 +59,7 @@ public class MainPlayerScript : MonoBehaviour
 
             //GIVE PLAYER AN ITEM
             //current_item = Random.Range(0, 3);
-            current_item = Random.Range(0,0);
+            current_item = Random.Range(1,1);
             print("---GOT ITEM: " + current_item);
 
 
@@ -101,6 +101,8 @@ public class MainPlayerScript : MonoBehaviour
         checkpointIndex = 0;
         GameObject gmo = GameObject.Find("GameManager");
         gm = gmo.GetComponent<GameManager>();
+
+
         //Find the script where you want to call item use functions
         item_effects_script = GameObject.FindGameObjectWithTag("ItemUse").GetComponent<ItemEffects>();
         sound_effects_script = GameObject.FindGameObjectWithTag("SFX").GetComponent<apse>();
@@ -152,9 +154,11 @@ public class MainPlayerScript : MonoBehaviour
         }
 
         else
-        {
-            //SET USER AND TARGET------------------------------------------------------------------------------------------
+        {     
+            //Play sfx 
+            sound_effects_script.play_sfx_use_item();
 
+            //SET USER AND TARGET------------------------------------------------------------------------------------------
             if (current_item == 0)
             { 
                 //If playerID == 1, target = 2 
@@ -172,8 +176,6 @@ public class MainPlayerScript : MonoBehaviour
                     else id = x.transform;                //Player who used the item
                 }
 
-                //Play sfx and reset
-                sound_effects_script.play_sfx_use_item();
                 Debug.Log("Player " + playerID + " used item " + current_item); 
 
                 var old_current_item = current_item;
@@ -198,6 +200,7 @@ public class MainPlayerScript : MonoBehaviour
             if (current_item == 1)
             {
                 item_effects_script.use_shaker_item(target_camera);
+                current_item = -1;
             }
             
             
@@ -205,10 +208,12 @@ public class MainPlayerScript : MonoBehaviour
             if (current_item == 2)
             item_effects_script.use_distraction_item(target_camera);
 
+            current_item = -1;
+
 
             //Dont write code after this, doesnt get called 
-          
-            
+
+
         }
    
          

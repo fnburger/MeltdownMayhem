@@ -12,13 +12,16 @@ public class GameManager : MonoBehaviour
     [Header("Reference to the LevelCamera")]
     [SerializeField]
     [Tooltip("You must set this reference manually in the editor.")]
+
     public Camera levelCam;
     [Header("List of Players")]
     [Tooltip("Gets filled automatically when players join")]
+
     public List<PlayerInput> players = new List<PlayerInput>();
     [Header("Player Starting Locations")]
     [Tooltip("Move these to the desired locations. Players get moved to this location after joining.")]
     [SerializeField]
+
     private List<Transform> startingPoints; // a list of player starting points
     [Header("Player Camera render layers")]
     [Tooltip("Must be the same as the camera culling mask settings in each player prefab respectively. Do not change if each player sees though the correct camera.")]
