@@ -35,16 +35,15 @@ public class MainPlayerScript : MonoBehaviour
     public PlayerInput player; // reference to PlayerInput object of this component's owning player
     public GameManager gm;
 
+   // int n = 0;          //Timer
+    float hit_seconds_from_boulder = 1.25f;       //sets amount of seconds you can't move after hit by boulder
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //print(hit.gameObject.name);
     }
 
-    public void TakeDamage(GameObject insigator, float amount)
-    {
-
-    }
-
+ 
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
@@ -52,15 +51,20 @@ public class MainPlayerScript : MonoBehaviour
         //ITEM BOX COLLISION
         if (other.gameObject.layer == 12)
         {
+     
             //PLAY SFX
             sfx_source = GetComponent<AudioSource>();
             sfx_source.Play();
             Debug.Log("Game object: " + this.gameObject);
 
-            //GIVE PLAYER AN ITEM
-            //current_item = Random.Range(0, 3);
-            current_item = Random.Range(1,1);
-            print("---GOT ITEM: " + current_item);
+            if (current_item == -1)
+            {
+                //GIVE PLAYER AN ITEM
+                current_item = Random.Range(0, 0);
+                //current_item = Random.Range(1,1);
+                print("---GOT ITEM: " + current_item);
+            }
+      
 
 
             //CREATE PARTICLES AND DESTROY ITEM BOX
@@ -69,14 +73,27 @@ public class MainPlayerScript : MonoBehaviour
             Destroy(particles, 0.7f);
         }
 
-        //COLLISION WITH BOULDER FROM ENEMY
+
+
+
+        //COLLISION WITH BOULDER FROM ENEMY-----------------------------------------------------------
         if (other.gameObject.layer == 15)
         {
-            Debug.Log("TARGET: " + other.GetComponent<RockVars>().target);
+            //Debug.Log("TARGET: " + other.GetComponent<RockVars>().target);
 
-            if (other.GetComponent<RockVars>().target == this.transform)
+            //Boulder has reached target
+            if (other.GetComponent<RockVars>().target == playerID)
             {
-                Debug.Log("Hit enemy");
+                Debug.Log("Hit enemy (player " + playerID + ")");
+                game_manager.DisablePlayerController();
+                sound_effects_script.play_sfx_hit();
+
+                //Wait until being able to move again
+                StartCoroutine(BoulderTimer());
+
+                //Should work but doesn't
+                Destroy(other.gameObject); 
+
             }
         }
     }
@@ -109,6 +126,14 @@ public class MainPlayerScript : MonoBehaviour
         game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
+    IEnumerator BoulderTimer() 
+    { 
+        yield return new WaitForSeconds(hit_seconds_from_boulder);              //Do this loop until condition is wrong
+
+        Debug.Log("Player should be able to move again");
+        game_manager.EnablePlayerController();
+    }
+
     public void MoveToCurrentCheckpoint()
     {
         Debug.Log("Lakitu: Moving Player " + playerID + " to last checkpoint!");
@@ -129,8 +154,7 @@ public class MainPlayerScript : MonoBehaviour
     // gets triggered when the jump animation starts
     void JumpEvent()
     {
-        // TODO: play spin effect
-        
+        sound_effects_script.play_sfx_jump();
         //Debug.Log(current_item);
     }
 
@@ -175,7 +199,7 @@ public class MainPlayerScript : MonoBehaviour
                 //Use
                 if (old_current_item == 0)
                 {
-                    item_effects_script.use_rock_item(id, other);
+                    item_effects_script.use_rock_item(id, other, target_id);
                 }
 
                 

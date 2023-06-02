@@ -11,6 +11,9 @@ public class apse : MonoBehaviour
     //PUT ALL SFX IN THE GAME IN HERE (and create a function down below, and also assign the sound in the components)
     public AudioClip sfx_no;
     public AudioClip sfx_use_item;
+    public AudioClip sfx_jump;
+    public AudioClip sfx_hit;
+    public AudioClip sfx_rock_destroy;
 
 
 
@@ -26,6 +29,21 @@ public class apse : MonoBehaviour
     public void play_sfx_use_item()
     {
         audio_source.PlayOneShot(sfx_use_item, volume);
+    }    
+    
+    public void play_sfx_jump()
+    {
+        audio_source.PlayOneShot(sfx_jump, volume);
+    }   
+    
+    public void play_sfx_hit()
+    {
+        audio_source.PlayOneShot(sfx_hit, volume);
+    }    
+    
+    public void play_sfx_rock_destroy()
+    {
+        audio_source.PlayOneShot(sfx_rock_destroy, volume);
     }
 
 

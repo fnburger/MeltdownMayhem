@@ -4134,6 +4134,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4523032426398783290, guid: 8cb132863eddd644db52690d1c483884,
+        type: 3}
+      propertyPath: sfx_hit
+      value: 
+      objectReference: {fileID: 8300000, guid: deb1b9de16991a44caa39bd4476f02ca, type: 3}
+    - target: {fileID: 4523032426398783290, guid: 8cb132863eddd644db52690d1c483884,
+        type: 3}
+      propertyPath: sfx_jump
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ab1ddc7eaaa79e43a1805d571604c69, type: 3}
+    - target: {fileID: 4523032426398783290, guid: 8cb132863eddd644db52690d1c483884,
+        type: 3}
+      propertyPath: sfx_rock_destroy
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b1ba93a64fcd1a4aba147403c7135bc, type: 3}
     - target: {fileID: 4523032426398783291, guid: 8cb132863eddd644db52690d1c483884,
         type: 3}
       propertyPath: m_Name
