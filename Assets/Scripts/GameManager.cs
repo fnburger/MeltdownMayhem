@@ -39,11 +39,14 @@ public class GameManager : MonoBehaviour
     private bool gameIsLive = false;
     AudioSource gameStartSound;
     private bool istTesting;
+    public GameObject CountdownDisplayObject;
+    private int initialStateHash; 
 
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         maxPlayerCount = playerInputManager.maxPlayerCount;
+        initialStateHash = CountdownDisplayObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
     }
 
     // Start is called before the first frame update
@@ -172,13 +175,21 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Debug.Log("Starting game in " + countdownTime + " seconds...");
 
-        // TODO: show countdown, its length in seconds should be equal to countdownTime
-
+        // show countdown, its length in seconds should be equal to countdownTime
+        CountdownDisplayObject.GetComponent<SpriteRenderer>().enabled = true;
+        CountdownDisplayObject.GetComponent<Animator>().Play(initialStateHash, 0, 0f);
 
         // enable all player controllers after the countdown has passed
         Invoke("EnablePlayerController", countdownTime);
         // play start game sound after countdown has finished
         Invoke("PlayGameStartSound", countdownTime);
+        // hide the countdown after it finishes
+        Invoke("stopCountdown", countdownTime);
+    }
+
+    public void stopCountdown()
+    {
+        CountdownDisplayObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // for devs only
