@@ -23,8 +23,7 @@ public class Checkpoint : MonoBehaviour
                 // set the players last visited checkpoint to this one
                 Debug.Log("a character entered checkpoint " + index + ". Setting that players checkpointID from " + (index-1) + " to " + index);
                 ps.checkpointIndex = index;
-                //ps.currentCheckpoint = this.transform.parent.gameObject.transform;
-                ps.currentCheckpoint = this.transform.parent.gameObject.transform;
+                ps.currentCheckpoint = gameObject.transform;
             }
         }
         

@@ -34,7 +34,7 @@ public class draw_item : MonoBehaviour
             return main_player_script.current_item;
         }
 
-        else Debug.Log("Player script is null");
+        else 
 
         return -1;
     }
