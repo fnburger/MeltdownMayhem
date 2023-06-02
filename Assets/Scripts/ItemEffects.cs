@@ -24,7 +24,7 @@ public class ItemEffects : MonoBehaviour
     }
 
     //Rock that is targeting the enemy. Slows down temporarily when hit.
-    public void use_rock_item(Transform user, Transform target)
+    public void use_rock_item(Transform user, Transform target, int target_id)
     {
         Debug.Log("Haha I used a rock item OMEGALUL");
 
@@ -40,7 +40,7 @@ public class ItemEffects : MonoBehaviour
         body.velocity = velocity;                                                    //Fly away to victory
         body.AddTorque(new Vector3(160.0f,140.0f,180.0f), ForceMode.Force);         //Haha funny rotation
 
-        rock.GetComponent<RockVars>().target = target;
+        rock.GetComponent<RockVars>().target = target_id;
     }    
     
 
