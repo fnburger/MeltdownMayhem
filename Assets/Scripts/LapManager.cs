@@ -37,8 +37,6 @@ public class LapManager : MonoBehaviour
                 if(ps.lapNumber > totalLaps)
                 {
                     // End the race
-                    //Debug.Log("You won!");
-                    //gm.EndGame(player, ps.playerID);
                     gm.EndGame(player);
                 }
             }

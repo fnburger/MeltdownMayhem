@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
@@ -150,13 +151,18 @@ public class GameManager : MonoBehaviour
         levelCam.enabled = false;
     }
 
-    public void MovePlayerToPosition(PlayerInput player, Transform location)
+    public void MovePlayerToPosition(PlayerInput player, Transform tr)
     {
         DisablePlayerController(player);
-        Transform playerParent = player.transform.parent;
-        playerParent.transform.position = location.position;
-        playerParent.transform.rotation = location.rotation;
-        //EnablePlayerController(player);
+        StartCoroutine(Teleport(player, tr));
+    }
+
+    public IEnumerator Teleport(PlayerInput player, Transform tr)
+    {
+        yield return new WaitForSeconds(2);
+        player.gameObject.transform.position = tr.position;
+        player.gameObject.transform.rotation = tr.rotation;
+        EnablePlayerController(player);
     }
 
     public void StartGame()
@@ -191,6 +197,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // TODO
+        Time.timeScale = 0;
     }
 
     public void UnpauseGame()
@@ -199,6 +206,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // TODO
+        Time.timeScale = 1;
     }
 
     public void PlayGameStartSound()
@@ -206,17 +214,38 @@ public class GameManager : MonoBehaviour
         if (gameStartSound != null) gameStartSound.Play(0);
     }
    
-    public void EndGame(PlayerInput winner) //, playerID id
+    public void EndGame(PlayerInput winner) 
     {
         // winner completed the last lap
-        //Debug.Log("Player " + id + " won!");
-        Debug.Log("Player ?" + " won!");
+        
+        Transform playerParent = winner.transform.parent;
+        int winnerID = playerParent.GetComponentInChildren<MainPlayerScript>().playerID;
+        string playerPrefsKey = "";
+        string winnerName;
+        switch(winnerID)
+        {
+            case 1:
+                playerPrefsKey = "player1_name";
+                break;
+            case 2:
+                playerPrefsKey = "player2_name";
+                break;
+        }
+        if (!PlayerPrefs.HasKey(playerPrefsKey))
+        {
+            PlayerPrefs.SetString(playerPrefsKey, "Player "+winnerID);
+        }
+        winnerName = PlayerPrefs.GetString(playerPrefsKey);
+        Debug.Log(winnerName + " won!");
 
-        // TODO
+        // TODO: show some sort of endscreen before we load the menu level
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("Menu");
     }
 
     public void ResetGameState()
     {
-        // TODO
+        SceneManager.LoadScene("Level1");
     }
 }

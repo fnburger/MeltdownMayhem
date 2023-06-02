@@ -3030,6 +3030,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d917c5300869ea4dbf308942bd6a3a2, type: 3}
+--- !u!23 &2691462883740807480 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0d917c5300869ea4dbf308942bd6a3a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3645781109174070716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4492625726640181485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d917c5300869ea4dbf308942bd6a3a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3645781109174070716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5023586605337463529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492625726640181485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f651309d138f9104ab03c5f428a0dd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customColor: 0
+  renderer: {fileID: 2691462883740807480}
 --- !u!1001 &6030629021915420608
 PrefabInstance:
   m_ObjectHideFlags: 0

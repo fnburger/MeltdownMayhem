@@ -47,7 +47,7 @@ public class MainPlayerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
+        //Debug.Log("Player " + playerID + " collided with object of layer " + other.gameObject.layer);
 
         //ITEM BOX COLLISION
         if (other.gameObject.layer == 12)
@@ -111,26 +111,17 @@ public class MainPlayerScript : MonoBehaviour
 
     public void MoveToCurrentCheckpoint()
     {
+        Debug.Log("Lakitu: Moving Player " + playerID + " to last checkpoint!");
         if (!currentCheckpoint)
         {
             // move to start point instead
             gm.MovePlayerToStart(player);
-            //gm.EnablePlayerController(player);
         }
         else
         {
+            // move player to their last checkpoint
             Transform tr = currentCheckpoint;
-            tr.position = new Vector3(59, 9, -1);
             gm.MovePlayerToPosition(player, tr);
-            // move player to last checkpoint position
-            //Debug.Log("Moving a player back to last checkpoint");
-            
-            //Debug.Log("Checkpoint rotation: " + currentCheckpoint.rotation);
-            //Transform playerParent = player.transform.parent;
-            //playerParent.transform.position = currentCheckpoint.TransformPoint(0, 0, 0);
-            //playerParent.transform.position = new Vector3(59, 8, -1);
-            //Debug.Log("New position: " + playerParent.transform.position);
-            //playerParent.transform.rotation = currentCheckpoint.rotation;
         }
         
     }
