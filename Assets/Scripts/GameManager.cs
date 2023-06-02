@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
         // play start game sound after countdown has finished
         Invoke("PlayGameStartSound", countdownTime);
         // hide the countdown after it finishes
-        Invoke("stopCountdown", countdownTime);
+        Invoke("stopCountdown", countdownTime+1);
     }
 
     public void stopCountdown()
