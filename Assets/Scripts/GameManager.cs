@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
         
         Transform playerParent = winner.transform.parent;
         int winnerID = playerParent.GetComponentInChildren<MainPlayerScript>().playerID;
-        string playerPrefsKey = "";
+        string playerPrefsKey = "Player";
         string winnerName;
         switch(winnerID)
         {
@@ -242,11 +242,14 @@ public class GameManager : MonoBehaviour
                 playerPrefsKey = "player2_name";
                 break;
         }
-        if (!PlayerPrefs.HasKey(playerPrefsKey))
+        if (!PlayerPrefs.HasKey(playerPrefsKey) || PlayerPrefs.GetString(playerPrefsKey) == "" || PlayerPrefs.GetString(playerPrefsKey) == " ")
         {
-            PlayerPrefs.SetString(playerPrefsKey, "Player "+winnerID);
+            //PlayerPrefs.SetString(playerPrefsKey, "Player"+winnerID);
+            winnerName = "Player " + winnerID;
+        } else
+        {
+            winnerName = PlayerPrefs.GetString(playerPrefsKey);
         }
-        winnerName = PlayerPrefs.GetString(playerPrefsKey);
         Debug.Log(winnerName + " won!");
 
         // TODO: show some sort of endscreen before we load the menu level

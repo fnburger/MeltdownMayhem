@@ -85,7 +85,7 @@ public class MainPlayerScript : MonoBehaviour
             if (other.GetComponent<RockVars>().target == playerID)
             {
                 Debug.Log("Hit enemy (player " + playerID + ")");
-                game_manager.DisablePlayerController();
+                game_manager.DisablePlayerController(player);
                 sound_effects_script.play_sfx_hit();
 
                 //Wait until being able to move again
@@ -131,7 +131,7 @@ public class MainPlayerScript : MonoBehaviour
         yield return new WaitForSeconds(hit_seconds_from_boulder);              //Do this loop until condition is wrong
 
         Debug.Log("Player should be able to move again");
-        game_manager.EnablePlayerController();
+        game_manager.EnablePlayerController(player);
     }
 
     public void MoveToCurrentCheckpoint()

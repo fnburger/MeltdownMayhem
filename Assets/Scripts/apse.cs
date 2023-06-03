@@ -33,7 +33,7 @@ public class apse : MonoBehaviour
     
     public void play_sfx_jump()
     {
-        audio_source.PlayOneShot(sfx_jump, volume);
+        audio_source.PlayOneShot(sfx_jump, 0.01f);
     }   
     
     public void play_sfx_hit()
