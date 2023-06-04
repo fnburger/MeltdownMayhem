@@ -36,11 +36,13 @@ public class GameManager : MonoBehaviour
     [Header("Delay before the game starts after player 2 has joined")]
     [Tooltip("Should be the same length in seconds as the countdown animation.")]
     public int countdownTime = 3; // in seconds
-    private bool gameIsLive = false;
+    public bool gameIsLive = false;
+    public bool gameIsPaused = false;
     AudioSource gameStartSound;
     private bool istTesting;
     public GameObject CountdownDisplayObject;
-    private int initialStateHash; 
+    private int initialStateHash;
+    public GameObject PauseMenu;
 
     private void Awake()
     {
@@ -62,16 +64,11 @@ public class GameManager : MonoBehaviour
         // TODO: do stuff that needs to be checked every frame globally
         // stuff per player etc. can be done with another script on each player object 
 
-        if(!gameIsLive && players.Count == 2)
+        if(!gameIsLive && players.Count == 2 && !gameIsPaused)
         {
             StartGame(); // start game when player 2 has joined
         }
-
-        if(gameIsLive && players.Count != 2)
-        {
-            // TODO: Pause Game because a player left :ccccccc
-            PauseGame();
-        }
+        
     }
 
     public void AddPlayer(PlayerInput player)
@@ -204,7 +201,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        gameIsLive = false;
+        gameIsPaused = true;
+        PauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // TODO
@@ -213,7 +211,8 @@ public class GameManager : MonoBehaviour
 
     public void UnpauseGame()
     {
-        gameIsLive = true;
+        PauseMenu.SetActive(false);
+        gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // TODO
@@ -260,6 +259,13 @@ public class GameManager : MonoBehaviour
 
     public void ResetGameState()
     {
+        UnpauseGame();
         SceneManager.LoadScene("Level1");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        UnpauseGame();
+        SceneManager.LoadScene("Menu");
     }
 }
