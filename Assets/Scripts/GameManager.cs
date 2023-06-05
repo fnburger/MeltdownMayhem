@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
@@ -43,6 +44,9 @@ public class GameManager : MonoBehaviour
     public GameObject CountdownDisplayObject;
     private int initialStateHash;
     public GameObject PauseMenu;
+    public GameObject EndScreen;
+    public VideoClip videofile;
+    public List<ItemDisplayManager> IDMs;
 
     private void Awake()
     {
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStartSound = GetComponent<AudioSource>();
-
+        //GameObject cam = GameObject.Find("LevelCam");
     }
 
     // Update is called once per frame
@@ -172,6 +176,12 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Debug.Log("Starting game in " + countdownTime + " seconds...");
 
+        // show item displays
+        for(int i = 0; i < maxPlayerCount; i++)
+        {
+            IDMs[i].ShowDisplay();
+        }
+
         // show countdown, its length in seconds should be equal to countdownTime
         CountdownDisplayObject.GetComponent<SpriteRenderer>().enabled = true;
         CountdownDisplayObject.GetComponent<Animator>().Play(initialStateHash, 0, 0f);
@@ -205,7 +215,6 @@ public class GameManager : MonoBehaviour
         PauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // TODO
         Time.timeScale = 0;
     }
 
@@ -215,7 +224,6 @@ public class GameManager : MonoBehaviour
         gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // TODO
         Time.timeScale = 1;
     }
 
@@ -223,11 +231,17 @@ public class GameManager : MonoBehaviour
     {
         if (gameStartSound != null) gameStartSound.Play(0);
     }
-   
+
+    // gets called when the winner completed the last lap
     public void EndGame(PlayerInput winner) 
     {
-        // winner completed the last lap
-        
+        // hide item displays
+        for (int i = 0; i < maxPlayerCount; i++)
+        {
+            IDMs[i].HideDisplay();
+        }
+
+        // get the name of the winner
         Transform playerParent = winner.transform.parent;
         int winnerID = playerParent.GetComponentInChildren<MainPlayerScript>().playerID;
         string playerPrefsKey = "Player";
@@ -243,7 +257,6 @@ public class GameManager : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey(playerPrefsKey) || PlayerPrefs.GetString(playerPrefsKey) == "" || PlayerPrefs.GetString(playerPrefsKey) == " ")
         {
-            //PlayerPrefs.SetString(playerPrefsKey, "Player"+winnerID);
             winnerName = "Player " + winnerID;
         } else
         {
@@ -251,12 +264,15 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log(winnerName + " won!");
 
-        // TODO: show some sort of endscreen before we load the menu level
+        // show endscreen
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SceneManager.LoadScene("Menu");
+        Time.timeScale = 0;
+        EndScreen.SetActive(true);
+        EndScreen.GetComponent<ResultScreen>().setWinnerText(winnerName);
     }
 
+    // gets called when a player presses Restart in the pause menu
     public void ResetGameState()
     {
         UnpauseGame();
@@ -267,5 +283,26 @@ public class GameManager : MonoBehaviour
     {
         UnpauseGame();
         SceneManager.LoadScene("Menu");
+    }
+
+    // plays a video in front of the players' camera.
+    // playerID = the affected players' id (should be 1 or 2).
+    // alpha: a float between 0 and 1. (e.g. 0.8f)
+    public void PlayVideo(int playerID, float alpha)
+    {
+        var VideoPlayer = cameras[playerID-1].GetComponent<VideoPlayer>();
+        VideoPlayer.playOnAwake = false;
+        VideoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.CameraNearPlane;
+        VideoPlayer.targetCameraAlpha = alpha;
+        VideoPlayer.clip = videofile;
+        VideoPlayer.Play();
+    }
+
+    // stops a playing video for the given player
+    public void StopVideo(int playerID)
+    {
+        var VideoPlayer = cameras[playerID - 1].GetComponent<VideoPlayer>();
+        VideoPlayer.Stop();
+        VideoPlayer.frame = 1;
     }
 }
