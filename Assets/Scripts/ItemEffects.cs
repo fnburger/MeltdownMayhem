@@ -62,5 +62,7 @@ public class ItemEffects : MonoBehaviour
     public void use_distraction_item(GameObject target)
     {
         Debug.Log("Used video item");
+        // do something like game_manager.PlayVideo(target_id, 0.8f);
+        // then invoke the game_manager.StopVideo(target_id) method.
     }
 }

@@ -446,5 +446,17 @@ namespace StarterAssets
             mainScript.UseItem();
         }
 
+        private void OnPauseMenu()
+        {
+            GameObject GameManagerObject = GameObject.FindWithTag("GameManager");
+            GameManager gm = GameManagerObject.GetComponent<GameManager>();
+            if(!gm.gameIsPaused)
+            {
+                gm.PauseGame();
+            } else
+            {
+                gm.UnpauseGame();
+            }
+        }
     }
 }

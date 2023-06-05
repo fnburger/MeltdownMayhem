@@ -140,7 +140,10 @@ public class MainPlayerScript : MonoBehaviour
         if (!currentCheckpoint)
         {
             // move to start point instead
-            gm.MovePlayerToStart(player);
+            Transform start = player.gameObject.transform;
+            start.position = new Vector3(90.0f, 8.8f, 9.4f);
+            start.rotation = new Quaternion(0f, -90f, 0f, 0f);
+            gm.MovePlayerToPosition(player, start);
         }
         else
         {

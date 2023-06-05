@@ -14,11 +14,16 @@ public class apse : MonoBehaviour
     public AudioClip sfx_jump;
     public AudioClip sfx_hit;
     public AudioClip sfx_rock_destroy;
-
+    private float gameVolume;
 
 
     private float volume = 1.0f;
 
+    public void Start()
+    {
+        gameVolume = PlayerPrefs.GetFloat("gameVolume");
+        AudioListener.volume = gameVolume;
+    }
 
     //PLAY ALL SFX HERE
     public void play_sfx_no()
@@ -33,7 +38,7 @@ public class apse : MonoBehaviour
     
     public void play_sfx_jump()
     {
-        audio_source.PlayOneShot(sfx_jump, 0.01f);
+        audio_source.PlayOneShot(sfx_jump, volume);
     }   
     
     public void play_sfx_hit()

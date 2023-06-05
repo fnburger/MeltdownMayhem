@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private float gameVolume;
-    private float bgmVolume;
 
     public void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         LoadVolumeSettings();
     }
 
@@ -30,11 +31,7 @@ public class MainMenu : MonoBehaviour
     private void LoadVolumeSettings()
     {
         gameVolume = PlayerPrefs.GetFloat("gameVolume");
-        bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
         AudioListener.volume = gameVolume;
-        // TODO: use bgmVolume to set it
-
-
     }
 
 }
