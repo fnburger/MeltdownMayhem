@@ -59,8 +59,10 @@ public class ItemEffects : MonoBehaviour
   
 
     //Item that shakes the camera of the other player.
-    public void use_shaker_item(Transform target_player)
+    public void use_shaker_item()
     {
+        sound_effects_script.play_sfx_death();
+        sound_effects_script.play_sfx_scream();
         // this was implemented inside the mainplayerscript.GetShook method and the CameraShaker script
     }
 

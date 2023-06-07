@@ -213,7 +213,8 @@ public class MainPlayerScript : MonoBehaviour
             //CAMERA SHAKE EFFECT--------------------------------------------------------------------
             if (current_item == 1)
             {
-                game_manager.players[target_id-1].gameObject.GetComponentInChildren<MainPlayerScript>().GetShook(20f, 10f, 3f);
+                item_effects_script.use_shaker_item();
+                game_manager.players[target_id-1].gameObject.GetComponentInChildren<MainPlayerScript>().GetShook(9f, 20f, 2f);
                 current_item = -1;
             }
             
