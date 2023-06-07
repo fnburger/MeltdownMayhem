@@ -14,7 +14,9 @@ public class apse : MonoBehaviour
     public AudioClip sfx_jump;
     public AudioClip sfx_hit;
     public AudioClip sfx_rock_destroy;
-    public AudioClip sfx_countdown;
+    public AudioClip sfx_countdown;    
+    public AudioClip sfx_death;
+    public AudioClip sfx_scream;
 
 
 
@@ -50,6 +52,16 @@ public class apse : MonoBehaviour
     public void play_sfx_countdown()
     {
         audio_source.PlayOneShot(sfx_countdown, volume);
+    }   
+    
+    public void play_sfx_death()
+    {
+        audio_source.PlayOneShot(sfx_death, volume);
+    }
+        
+    public void play_sfx_scream()
+    {
+        audio_source.PlayOneShot(sfx_scream, volume);
     }
 
 

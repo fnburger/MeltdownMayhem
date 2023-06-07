@@ -51,7 +51,6 @@ public class MainPlayerScript : MonoBehaviour
         //ITEM BOX COLLISION
         if (other.gameObject.layer == 12)
         {
-     
             //PLAY SFX
             sfx_source = GetComponent<AudioSource>();
             sfx_source.Play();
@@ -60,12 +59,10 @@ public class MainPlayerScript : MonoBehaviour
             if (current_item == -1)
             {
                 //GIVE PLAYER AN ITEM
-                current_item = Random.Range(0, 0);
+                current_item = Random.Range(1, 1);
                 //current_item = Random.Range(1,1);
                 print("---GOT ITEM: " + current_item);
             }
-      
-
 
             //CREATE PARTICLES AND DESTROY ITEM BOX
             GameObject particles = Instantiate(item_get_particles, transform.position, transform.rotation);
@@ -79,8 +76,6 @@ public class MainPlayerScript : MonoBehaviour
         //COLLISION WITH BOULDER FROM ENEMY-----------------------------------------------------------
         if (other.gameObject.layer == 15)
         {
-            //Debug.Log("TARGET: " + other.GetComponent<RockVars>().target);
-
             //Boulder has reached target
             if (other.GetComponent<RockVars>().target == playerID)
             {
@@ -93,7 +88,6 @@ public class MainPlayerScript : MonoBehaviour
 
                 //Should work but doesn't
                 Destroy(other.gameObject); 
-
             }
         }
     }
@@ -160,7 +154,6 @@ public class MainPlayerScript : MonoBehaviour
 
     public void UseItem()
     {
-
         //Nope
         if (current_item == -1)
         {
@@ -173,15 +166,14 @@ public class MainPlayerScript : MonoBehaviour
             //Play sfx 
             sound_effects_script.play_sfx_use_item();
 
+            //If playerID == 1, target = 2 
+            int target_id = playerID == 1 ? 2 : 1;
+            Transform other = transform;
+            Transform id = transform;
+
             //SET USER AND TARGET------------------------------------------------------------------------------------------
             if (current_item == 0)
-            { 
-                //If playerID == 1, target = 2 
-                int target_id = playerID == 1 ? 2 : 1;
-
-                Transform other = transform;
-                Transform id = transform;
-
+            {            
                 //Get target object for ROCK
                 foreach (var x in game_manager.players)
                 {
@@ -206,15 +198,21 @@ public class MainPlayerScript : MonoBehaviour
             }
 
 
-
             Camera[] camera_array = game_manager.cameras.ToArray();
             GameObject target_camera = playerID == 1 ? camera_array[1].gameObject : camera_array[0].gameObject;
 
 
+            //Get target CINEMACHINE object for the camera shake
+            foreach (var x in game_manager.players)
+            {
+                if (x.transform.parent.GetComponentInChildren<MainPlayerScript>().playerID == target_id)
+                    other = x.transform;              //Player who gets item in the face
+            }
+
             //CAMERA SHAKE EFFECT--------------------------------------------------------------------
             if (current_item == 1)
             {
-                item_effects_script.use_shaker_item(target_camera);
+                item_effects_script.use_shaker_item(other);
                 current_item = -1;
             }
             
