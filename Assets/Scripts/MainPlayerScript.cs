@@ -9,6 +9,7 @@ public class MainPlayerScript : MonoBehaviour
     public AudioSource sfx_source;              //Item get sfx
     public GameObject obj_play_sfx;
 
+    public CameraShaker cam_shaker;
 
     //Reference to script that holds all the item effects
     ItemEffects item_effects_script;
@@ -212,7 +213,7 @@ public class MainPlayerScript : MonoBehaviour
             //CAMERA SHAKE EFFECT--------------------------------------------------------------------
             if (current_item == 1)
             {
-                item_effects_script.use_shaker_item(other);
+                GetShook(20f, 10f, 3f);
                 current_item = -1;
             }
             
@@ -231,4 +232,11 @@ public class MainPlayerScript : MonoBehaviour
    
          
     }
+
+    public void GetShook(float intensity, float frequency, float time)
+    {
+        Debug.Log("Used shaker item OMEGASHAKE");
+        CameraShaker.Instance.ShakeCamera(intensity, frequency, time);
+    }
+
 }

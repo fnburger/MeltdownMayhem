@@ -61,57 +61,8 @@ public class ItemEffects : MonoBehaviour
     //Item that shakes the camera of the other player.
     public void use_shaker_item(Transform target_player)
     {
-        Debug.Log("Used shaker item OMEGASHAKE");
-
-        //Trying things with Cinemachine
-        var component = target_player.transform.parent.GetComponentInChildren<ThirdPersonController>();
-        GameObject target_viewpoint = component.CinemachineCameraTarget;
-        initial_target_viewpoint_position = target_viewpoint.transform.position;                        //Remember this guy to reset it afterwards
-        shaking_target_viewpoint = target_viewpoint;
-        target_p = target_player;
-
-        //Sfx
-        sound_effects_script.play_sfx_death();
-        sound_effects_script.play_sfx_scream();
-
-        //Effect
-        StartCoroutine(CameraShake());
+        // this was implemented inside the mainplayerscript.GetShook method and the CameraShaker script
     }
-
-    IEnumerator CameraShake()
-    {
-        //Shake that thing 
-        while (n < shake_frames)
-        {
-            shaking_target_viewpoint.transform.position = new Vector3(
-            initial_target_viewpoint_position.x + Random.Range(-4,4),
-            initial_target_viewpoint_position.y + Random.Range(-2, 2),
-            initial_target_viewpoint_position.z + Random.Range(-3, 3));
-
-            n++;
-
-            Debug.Log(n);
-        
-            yield return null;
-        }
-
-        n = 0;
-
-        //Reset
-        shaking_target_viewpoint.transform.position = new Vector3(
-            initial_target_viewpoint_position.x - Mathf.Abs(initial_target_viewpoint_position.x - target_p.transform.position.x),
-            initial_target_viewpoint_position.y, //- Mathf.Abs(initial_target_viewpoint_position.y - target_p.transform.position.y),
-            initial_target_viewpoint_position.z //- Mathf.Abs(initial_target_viewpoint_position.z - target_p.transform.position.z)
-            );
-
-        Debug.Log("Changed x: " + Mathf.Abs(initial_target_viewpoint_position.x - target_p.transform.position.x));
-        Debug.Log("Changed y: " + Mathf.Abs(initial_target_viewpoint_position.x - target_p.transform.position.y));
-        Debug.Log("Changed z: " + Mathf.Abs(initial_target_viewpoint_position.x - target_p.transform.position.z));
-
-        Debug.Log("Cam should be normal again");
-    }
-
-
 
 
     //Item that creates a stupid video in front of the other player and
