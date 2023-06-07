@@ -213,7 +213,7 @@ public class MainPlayerScript : MonoBehaviour
             //CAMERA SHAKE EFFECT--------------------------------------------------------------------
             if (current_item == 1)
             {
-                GetShook(20f, 10f, 3f);
+                game_manager.players[target_id-1].gameObject.GetComponentInChildren<MainPlayerScript>().GetShook(20f, 10f, 3f);
                 current_item = -1;
             }
             
@@ -236,7 +236,7 @@ public class MainPlayerScript : MonoBehaviour
     public void GetShook(float intensity, float frequency, float time)
     {
         Debug.Log("Used shaker item OMEGASHAKE");
-        CameraShaker.Instance.ShakeCamera(intensity, frequency, time);
+        cam_shaker.ShakeCamera(intensity, frequency, time);
     }
 
 }
