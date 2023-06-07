@@ -11,7 +11,7 @@ public class ItemEffects : MonoBehaviour
     public Transform player;                 //Player who uses the item
     public Transform target;                 //Player who gets the item in the face
 
-    static float rock_speed = 15.0f;           //Change this to make used rock item faster or slower
+    static float rock_speed = 25.0f;           //Change this to make used rock item faster or slower
     static float rock_offset_from_ground = 1.0f;
 
     GameManager game_manager;
@@ -62,7 +62,7 @@ public class ItemEffects : MonoBehaviour
     public void use_distraction_item(GameObject target)
     {
         Debug.Log("Used video item");
-        // do something like game_manager.PlayVideo(target_id, 0.8f);
+        // do something like game_manager.PlayVideo(target_id, 0.9f);
         // then invoke the game_manager.StopVideo(target_id) method.
     }
 }

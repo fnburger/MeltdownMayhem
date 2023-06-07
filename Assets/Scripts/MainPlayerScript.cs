@@ -36,7 +36,7 @@ public class MainPlayerScript : MonoBehaviour
     public GameManager gm;
 
    // int n = 0;          //Timer
-    float hit_seconds_from_boulder = 1.25f;       //sets amount of seconds you can't move after hit by boulder
+    float hit_seconds_from_boulder = 2.0f;       //sets amount of seconds you can't move after hit by boulder
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
