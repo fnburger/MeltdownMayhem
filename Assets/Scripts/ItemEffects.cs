@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
+
 
 public class ItemEffects : MonoBehaviour
 {
@@ -15,12 +17,17 @@ public class ItemEffects : MonoBehaviour
     static float rock_offset_from_ground = 1.0f;
 
     GameManager game_manager;
+    apse sound_effects_script;
+    public int shake_frames = 290;
+
+    //ThirdPersonController third_person_controller;
 
 
 
     void Start()
     {
         game_manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        sound_effects_script = GameObject.FindGameObjectWithTag("SFX").GetComponent<apse>();
     }
 
     //Rock that is targeting the enemy. Slows down temporarily when hit.
@@ -41,22 +48,25 @@ public class ItemEffects : MonoBehaviour
         body.AddTorque(new Vector3(160.0f,140.0f,180.0f), ForceMode.Force);         //Haha funny rotation
 
         rock.GetComponent<RockVars>().target = target_id;
-    }    
-    
+    }
+
+
+
+    Vector3 initial_target_viewpoint_position;
+    GameObject shaking_target_viewpoint;
+    Transform target_p;
+    int n = 0;
+  
 
     //Item that shakes the camera of the other player.
-    public void use_shaker_item(GameObject target_view)
+    public void use_shaker_item()
     {
-        //DEBUG
-        Debug.Log("Used shaker item OMEGASHAKE");
-        if (target_view == null) 
-            Debug.Log("target is nullomatico");
+        sound_effects_script.play_sfx_death();
+        sound_effects_script.play_sfx_scream();
+        // this was implemented inside the mainplayerscript.GetShook method and the CameraShaker script
+    }
 
 
-        //ACTUAL EFFECT
-        target_view.transform.Rotate(Time.deltaTime + 500,0,0);
-    }  
-    
     //Item that creates a stupid video in front of the other player and
     //makes it hard to see.
     public void use_distraction_item(GameObject target)

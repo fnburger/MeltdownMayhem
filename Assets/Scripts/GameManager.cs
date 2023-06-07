@@ -48,6 +48,11 @@ public class GameManager : MonoBehaviour
     public VideoClip videofile;
     public List<ItemDisplayManager> IDMs;
 
+    apse sound_effects_script;
+
+
+
+
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -59,7 +64,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStartSound = GetComponent<AudioSource>();
-        //GameObject cam = GameObject.Find("LevelCam");
+        sound_effects_script = GameObject.FindGameObjectWithTag("SFX").GetComponent<apse>();
     }
 
     // Update is called once per frame
@@ -186,10 +191,12 @@ public class GameManager : MonoBehaviour
         CountdownDisplayObject.GetComponent<SpriteRenderer>().enabled = true;
         CountdownDisplayObject.GetComponent<Animator>().Play(initialStateHash, 0, 0f);
 
+        sound_effects_script.play_sfx_countdown();
+
         // enable all player controllers after the countdown has passed
         Invoke("EnablePlayerController", countdownTime);
         // play start game sound after countdown has finished
-        Invoke("PlayGameStartSound", countdownTime);
+         Invoke("PlayGameStartSound", countdownTime);
         // hide the countdown after it finishes
         Invoke("stopCountdown", countdownTime+1);
     }
