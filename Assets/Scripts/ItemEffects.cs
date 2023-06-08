@@ -69,9 +69,12 @@ public class ItemEffects : MonoBehaviour
 
     //Item that creates a stupid video in front of the other player and
     //makes it hard to see.
-    public void use_distraction_item(GameObject target)
+    public void use_distraction_item(int target)
     {
         Debug.Log("Used video item");
+        game_manager.PlayVideo(target, 0.95f);
+        //game_manager.playerIDD = target;
+        //game_manager.StopVideo(target);
         // do something like game_manager.PlayVideo(target_id, 0.9f);
         // then invoke the game_manager.StopVideo(target_id) method.
     }

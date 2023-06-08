@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 
 public class MainPlayerScript : MonoBehaviour
 {
@@ -60,8 +61,8 @@ public class MainPlayerScript : MonoBehaviour
             if (current_item == -1)
             {
                 //GIVE PLAYER AN ITEM
-                current_item = Random.Range(1, 1);
-                //current_item = Random.Range(1,1);
+                //current_item = Random.Range(1, 1);
+                current_item = Random.Range(0,2);
                 print("---GOT ITEM: " + current_item);
             }
 
@@ -224,7 +225,10 @@ public class MainPlayerScript : MonoBehaviour
             
             //VIDEO DISTRACTION-------------------------------------------------------------------
             if (current_item == 2)
-            item_effects_script.use_distraction_item(target_camera);
+            {
+                StartCoroutine(StopVideoTimer(target_id));
+                item_effects_script.use_distraction_item(target_id);              
+            }
 
             current_item = -1;
 
@@ -236,6 +240,17 @@ public class MainPlayerScript : MonoBehaviour
    
          
     }
+
+
+    IEnumerator StopVideoTimer(int target_id)
+    {
+        yield return new WaitForSeconds(3.4f);              //Do this loop until condition is wrong
+
+        var VideoPlayer = game_manager.cameras[target_id - 1].GetComponent<VideoPlayer>();
+        VideoPlayer.Stop();
+        VideoPlayer.frame = 1;
+    }
+
 
     public void GetShook(float intensity, float frequency, float time)
     {

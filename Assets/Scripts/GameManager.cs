@@ -305,11 +305,10 @@ public class GameManager : MonoBehaviour
         VideoPlayer.Play();
     }
 
-    // stops a playing video for the given player
-    public void StopVideo(int playerID)
-    {
-        var VideoPlayer = cameras[playerID - 1].GetComponent<VideoPlayer>();
-        VideoPlayer.Stop();
-        VideoPlayer.frame = 1;
-    }
+   
+  
+
+
+
+
 }
