@@ -40,6 +40,8 @@ public class MainPlayerScript : MonoBehaviour
    // int n = 0;          //Timer
     float hit_seconds_from_boulder = 2.0f;       //sets amount of seconds you can't move after hit by boulder
 
+    public GameObject lastItemBox;
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //print(hit.gameObject.name);
@@ -56,20 +58,23 @@ public class MainPlayerScript : MonoBehaviour
             //PLAY SFX
             sfx_source = GetComponent<AudioSource>();
             sfx_source.Play();
-            Debug.Log("Game object: " + this.gameObject);
+            //Debug.Log("Game object: " + this.gameObject);
 
             if (current_item == -1)
             {
                 //GIVE PLAYER AN ITEM
                 //current_item = Random.Range(1, 1);
                 current_item = Random.Range(0,2);
-                print("---GOT ITEM: " + current_item);
+                //print("---GOT ITEM: " + current_item);
             }
 
             //CREATE PARTICLES AND DESTROY ITEM BOX
             GameObject particles = Instantiate(item_get_particles, transform.position, transform.rotation);
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            lastItemBox = other.gameObject;
+            other.gameObject.SetActive(false);
             Destroy(particles, 0.7f);
+            Invoke("ReactivateItembox", 4);
         }
 
 
@@ -81,7 +86,7 @@ public class MainPlayerScript : MonoBehaviour
             //Boulder has reached target
             if (other.GetComponent<RockVars>().target == playerID)
             {
-                Debug.Log("Hit enemy (player " + playerID + ")");
+                //Debug.Log("Hit enemy (player " + playerID + ")");
                 game_manager.DisablePlayerController(player);
                 sound_effects_script.play_sfx_hit();
 
@@ -162,7 +167,7 @@ public class MainPlayerScript : MonoBehaviour
         //Nope
         if (current_item == -1)
         {
-            Debug.Log("No item");
+            //Debug.Log("No item");
             sound_effects_script.play_sfx_no();
         }
 
@@ -188,7 +193,7 @@ public class MainPlayerScript : MonoBehaviour
                     else id = x.transform;                //Player who used the item
                 }
 
-                Debug.Log("Player " + playerID + " used item " + current_item); 
+                //Debug.Log("Player " + playerID + " used item " + current_item); 
 
                 var old_current_item = current_item;
                 current_item = -1;
@@ -254,8 +259,13 @@ public class MainPlayerScript : MonoBehaviour
 
     public void GetShook(float intensity, float frequency, float time)
     {
-        Debug.Log("Used shaker item OMEGASHAKE");
+        //Debug.Log("Used shaker item OMEGASHAKE");
         cam_shaker.ShakeCamera(intensity, frequency, time);
+    }
+
+    public void ReactivateItembox()
+    {
+        lastItemBox.SetActive(true);
     }
 
 }
