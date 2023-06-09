@@ -64,7 +64,7 @@ public class MainPlayerScript : MonoBehaviour
             {
                 //GIVE PLAYER AN ITEM
                 //current_item = Random.Range(1, 1);
-                current_item = Random.Range(0,2);
+                current_item = Random.Range(0,3);
                 //print("---GOT ITEM: " + current_item);
             }
 
